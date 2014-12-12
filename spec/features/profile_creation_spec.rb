@@ -14,7 +14,6 @@ feature "Profile creation" do
 		fill_in "First name", :with => "Bob"
 		fill_in "Last name", :with => "Smith"
 
-		fill_in "Current password", :with => "fooman123"
 		click_button "Update"
 
 		expect(page).to have_content("Bob Smith")
