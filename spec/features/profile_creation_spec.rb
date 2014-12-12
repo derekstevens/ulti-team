@@ -10,11 +10,14 @@ feature "Profile creation" do
 		click_button "Sign up"
 
 		expect(page).to have_content("Edit Profile")
-	end
 
-	scenario "That user fills out profile info" do
-		fill_in "First Name", :with => "Bob"
-		fill_in "Last Name", :with => "Smith"
+		fill_in "First name", :with => "Bob"
+		fill_in "Last name", :with => "Smith"
+
+		fill_in "Current password", :with => "fooman123"
+		click_button "Update"
+
+		expect(page).to have_content("Bob Smith")
 	end
 	 
 
