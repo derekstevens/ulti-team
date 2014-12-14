@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.1.2'
+ruby '2.1.4'
 
 
 gem 'rails', '4.2.0.beta1'
@@ -20,6 +20,9 @@ gem 'local_time'
 gem 'money-rails'
 gem 'paperclip'
 gem 'aws-sdk'
+gem 'unicorn-rails'
+gem 'mina'
+gem 'mina-unicorn', :require => false
 
 group :development, :test do
 	gem 'sqlite3'
