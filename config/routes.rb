@@ -6,8 +6,12 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   get 'dashboard' => 'users#dashboard'
   # You can have the root of your site routed with "root"
-  root 'static_pages#index'
+  
 
+  authenticated :user do 
+    root to: 'users#dashboard', as: :authenticated_root
+  end
+  root 'static_pages#index'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
