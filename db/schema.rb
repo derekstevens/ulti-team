@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141213183316) do
+ActiveRecord::Schema.define(version: 20150109121040) do
+
+  create_table "rosters", force: true do |t|
+    t.boolean  "captain"
+    t.integer  "team_roster_id"
+    t.integer  "user_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "team_rosters", force: true do |t|
+    t.string   "name"
+    t.integer  "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean  "current"
+  end
 
   create_table "teams", force: true do |t|
     t.datetime "created_at", null: false

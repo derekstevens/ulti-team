@@ -15,4 +15,6 @@ RSpec.describe Team, :type => :model do
 		team = Team.new(name: "Bruises", location: nil);
 		expect(team).to_not be_valid
 	end
+
+	
 end

@@ -24,8 +24,16 @@ feature "team creation" do
 		fill_in "Location", :with => "Boston, MA"
 
 		click_button "Create team"
-
 		expect(page).to have_content("Bruises")
+
+		team = Team.last
+		expect(team).to have_attributes(name: "Bruises")
+
+		roster = TeamRoster.last
+		expect(roster).to have_attributes(name: "Bruises #{Time.now.year}", current: true)
+
+		captain = Roster.last
+		expect(captain).to have_attributes(user_id: user.id, captain: true)
 
 	end
 end
