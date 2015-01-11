@@ -7,4 +7,12 @@ class User < ActiveRecord::Base
   def full_name
   	"#{self.first_name} #{self.last_name}"
   end
+
+  def is_captain?(team)
+		team_roster = TeamRoster.where("team_id = ? AND current = ?", team.id, true).first
+		roster = Roster.where("team_roster_id = ? AND user_id = ?", team_roster.id, self.id).first
+		if !roster.nil?
+			roster.captain?
+		end
+	end
 end

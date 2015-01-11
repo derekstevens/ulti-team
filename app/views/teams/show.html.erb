@@ -1,1 +1,8 @@
 <h1><%= @team.name %></h1>
+
+<% if user_signed_in? %>
+		<% if current_user.is_captain?(@team) %>
+		<p><%= link_to 'Edit team', edit_team_path %></p>
+		<p><%= link_to 'New roster', new_team_team_roster_path(@team) %></p>
+	<% end %>
+<% end %>
