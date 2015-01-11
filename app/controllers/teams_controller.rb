@@ -42,13 +42,10 @@ class TeamsController < ApplicationController
 		def create_default_team_roster(team)
 			team_roster = TeamRoster.new(:name => "#{team.name} #{Time.now.year}", :team_id => team.id, :current => true)
 			team_roster.save
-			add_current_user_as_captain(team_roster)
+			team_roster.add_current_user_as_captain(current_user)
 		end
 
-		def add_current_user_as_captain(team_roster)
-			roster = Roster.new(:user_id => current_user.id, :team_roster_id => team_roster.id, :captain => true)
-			roster.save
-		end
+		
 
 		def authenticate_captain!
 			team = Team.find(params[:id])
