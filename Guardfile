@@ -1,5 +1,16 @@
 
-guard :rspec, cmd: "bundle exec rspec" do
+guard :spork, :rspec_env => { 'RAILS_ENV' => 'test' } do
+  watch('config/application.rb')
+  watch('config/environment.rb')
+  watch('config/environments/test.rb')
+  watch(%r{^config/initializers/.+\.rb$})
+  watch('Gemfile.lock')
+  watch('spec/spec_helper.rb') { :rspec }
+  watch('test/test_helper.rb') { :test_unit }
+  watch(%r{features/support/}) { :cucumber }
+end
+
+guard :rspec, cmd: "rspec --drb" do
   require "guard/rspec/dsl"
   dsl = Guard::RSpec::Dsl.new(self)
 
@@ -55,3 +66,5 @@ guard :rspec, cmd: "bundle exec rspec" do
                       "spec/requests/#{m[1].singularize}_pages_spec.rb")
   end
 end
+
+
