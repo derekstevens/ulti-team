@@ -119,6 +119,11 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
+    guard-spork (2.1.0)
+      childprocess (>= 0.2.3)
+      guard (~> 2.0)
+      guard-compat (~> 1.0)
+      spork (>= 0.8.4)
     hike (1.2.3)
     hitimes (1.2.2)
     i18n (0.7.0)
@@ -263,6 +268,10 @@ GEM
       websocket (~> 1.0)
     shellany (0.0.1)
     slop (3.6.0)
+    spork (1.0.0rc4)
+    spork-rails (4.0.0)
+      rails (>= 3.0.0, < 5)
+      spork (>= 1.0rc0)
     spring (1.2.0)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
@@ -321,6 +330,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   guard-rspec
+  guard-spork
   jbuilder (~> 2.0)
   jquery-rails
   launchy
@@ -339,6 +349,7 @@ DEPENDENCIES
   sass-rails (~> 5.0.0.beta1)
   sdoc (~> 0.4.0)
   selenium-webdriver
+  spork-rails
   spring
   spring-commands-rspec
   sqlite3
