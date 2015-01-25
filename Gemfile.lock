@@ -70,6 +70,9 @@ GEM
       ffi (~> 1.0, >= 1.0.11)
     ci_reporter (2.0.0)
       builder (>= 2.1.2)
+    ci_reporter_rspec (1.0.0)
+      ci_reporter (~> 2.0)
+      rspec (>= 2.14, < 4)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.5)
@@ -335,6 +338,7 @@ DEPENDENCIES
   byebug
   capybara
   ci_reporter
+  ci_reporter_rspec
   coffee-rails (~> 4.0.0)
   database_cleaner
   devise

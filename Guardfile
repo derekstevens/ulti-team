@@ -10,7 +10,7 @@ guard :spork, :rspec_env => { 'RAILS_ENV' => 'test' } do
   watch(%r{features/support/}) { :cucumber }
 end
 
-guard :rspec, cmd: "rspec --drb" do
+guard :rspec, cmd: "rspec" do
   require "guard/rspec/dsl"
   dsl = Guard::RSpec::Dsl.new(self)
 

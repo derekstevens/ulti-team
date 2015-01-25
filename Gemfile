@@ -23,6 +23,10 @@ gem 'aws-sdk'
 gem 'unicorn-rails'
 gem 'mina'
 gem 'mina-unicorn', :require => false
+gem 'simplecov'
+gem 'simplecov-rcov'
+gem 'ci_reporter'
+gem 'ci_reporter_rspec'
 
 group :development, :test do
 	gem 'sqlite3'
@@ -37,9 +41,7 @@ group :development, :test do
   gem 'byebug'
   # Access an IRB console on exceptions page and /console in development
   gem 'web-console', '~> 2.0.0.beta2'
-  gem 'simplecov'
-  gem 'simplecov-rcov'
-  gem 'ci_reporter'
+
 end
 
 group :development do 
