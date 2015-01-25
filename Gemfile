@@ -25,7 +25,6 @@ gem 'mina'
 gem 'mina-unicorn', :require => false
 gem 'simplecov'
 gem 'simplecov-rcov'
-gem 'ci_reporter'
 gem 'ci_reporter_rspec'
 
 group :development, :test do
