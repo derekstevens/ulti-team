@@ -8,5 +8,5 @@ Rails.application.load_tasks
 
 namespace :ci do
 	require 'ci/reporter/rake/rspec' 
-	task :all => ['ci:setup:rspec', 'rspec']
+	task :rspec => 'ci:setup:rspec'
 end
