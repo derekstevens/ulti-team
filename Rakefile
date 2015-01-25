@@ -7,6 +7,4 @@ require 'ci/reporter/rake/rspec'
 
 Rails.application.load_tasks
 
-	 
-task :rspec => 'ci:setup:rspec'
 
