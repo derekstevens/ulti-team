@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="User" tests="5" time="0.011543" failures="0" errors="0" skipped="0" timestamp="2015-01-25T16:32:33-05:00">
+  <testcase name="User is valid with an email and a password" time="0.002535">
+  </testcase>
+  <testcase name="User is invalid without an email" time="0.002124">
+  </testcase>
+  <testcase name="User is invalid without a password" time="0.001587">
+  </testcase>
+  <testcase name="User is invalid without a proper email address" time="0.002602">
+  </testcase>
+  <testcase name="User is invalid without a proper password" time="0.002456">
+  </testcase>
+</testsuite>

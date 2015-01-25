@@ -337,7 +337,6 @@ DEPENDENCIES
   bourbon
   byebug
   capybara
-  ci_reporter
   ci_reporter_rspec
   coffee-rails (~> 4.0.0)
   database_cleaner

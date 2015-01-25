@@ -26,9 +26,9 @@ gem 'mina-unicorn', :require => false
 gem 'simplecov'
 gem 'simplecov-rcov'
 gem 'ci_reporter_rspec'
+gem 'pg'
 
 group :development, :test do
-	gem 'sqlite3'
 	gem 'spring-commands-rspec'
 	gem 'rspec-rails'
 	gem 'guard-rspec'
@@ -55,8 +55,4 @@ group :test do
 	gem 'selenium-webdriver'
 end
 
-group :production do
-	gem 'pg'
-	gem 'rails_12factor'
-end
 

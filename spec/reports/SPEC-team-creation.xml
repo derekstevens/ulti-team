@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="team creation" tests="2" time="0.167256" failures="0" errors="0" skipped="0" timestamp="2015-01-25T16:32:32-05:00">
+  <testcase name="team creation a non-signed-in user tries to create a new team" time="0.045462">
+  </testcase>
+  <testcase name="team creation a signed-in user creates a new team" time="0.120757">
+  </testcase>
+</testsuite>
