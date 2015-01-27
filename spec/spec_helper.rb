@@ -2,8 +2,6 @@ require 'simplecov'
 require 'simplecov-rcov'
 SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
 
-SimpleCov.start
-
 require 'rubygems'
 require 'spork'
 #uncomment the following line to use spork with the debugger
@@ -15,6 +13,9 @@ Spork.prefork do
   # need to restart spork for it take effect.
   # This file is copied to spec/ when you run 'rails generate rspec:install'
   ENV["RAILS_ENV"] ||= 'test'
+  unless ENV['DRB']
+    SimpleCov.start 'rails'
+  end
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
 
@@ -32,6 +33,7 @@ Spork.prefork do
     # config.mock_with :flexmock
     # config.mock_with :rr
     config.mock_with :rspec
+    config.include FactoryGirl::Syntax::Methods
 
     # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
     config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -49,7 +51,13 @@ Spork.prefork do
 end
 
 Spork.each_run do
-  # This code will be run each time you run your specs.
+  if ENV['DRB']
+    SimpleCov.start 'rails'
+    UltiTeam::Application.initialize!
+    class UltiTeam::Application
+      def initialize!; end
+    end
+  end
 
 end
 
