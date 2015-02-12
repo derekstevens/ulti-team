@@ -26,6 +26,8 @@ gem 'mina-unicorn', :require => false
 gem 'simplecov'
 gem 'simplecov-rcov'
 gem 'pg'
+gem 'bullet', :group => "development"
+gem 'quiet_assets', :group => "development"
 
 group :development, :test do
 	gem 'spring-commands-rspec'
