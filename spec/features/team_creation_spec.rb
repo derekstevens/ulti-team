@@ -8,7 +8,7 @@ feature "team creation" do
 	end
 
 	scenario "a signed-in user creates a new team" do
-		user = FactoryGirl.create(:user)
+		user = FactoryGirl.create(:user, email: "test@dgs.com", password: "fooman123")
 		visit "/users/sign_in"
 
 		fill_in "Email", :with => "test@dgs.com"
