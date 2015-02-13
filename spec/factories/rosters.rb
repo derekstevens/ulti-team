@@ -4,6 +4,10 @@ FactoryGirl.define do
     association :user
 
     captain false
+
+    factory :captain do 
+    	captain true
+    end
   end
 
 end

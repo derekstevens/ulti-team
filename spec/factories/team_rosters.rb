@@ -9,6 +9,8 @@ FactoryGirl.define do
     			player = FactoryGirl.create(:user)
           FactoryGirl.create(:roster, team_roster: TeamRoster.first, user: player)
         end
+        user = FactoryGirl.create(:user)
+        FactoryGirl.create(:roster, team_roster: TeamRoster.first, user: user, captain: true)
       end
     end
   end
