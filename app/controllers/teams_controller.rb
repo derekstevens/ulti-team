@@ -51,6 +51,8 @@ class TeamsController < ApplicationController
 			team = Team.find(params[:id])
 			team_roster = TeamRoster.where("team_id = ? AND current = ?", team.id, true).first
 			roster = Roster.where("team_roster_id = ? AND user_id = ?", team_roster.id, current_user.id).first
-			roster.captain?
+			if roster.captain? == false
+				redirect_to team
+			end
 		end
 end
