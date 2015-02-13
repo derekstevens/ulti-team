@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :users, :only => [:show]
   resources :teams do 
     resources :team_rosters
+    resources :games
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
