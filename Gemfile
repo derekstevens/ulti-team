@@ -34,8 +34,6 @@ group :development, :test do
 	gem 'rspec-rails'
 	gem 'guard-rspec'
 	gem 'factory_girl_rails'
-	gem 'spork-rails'
-	gem 'guard-spork'
 
   # Call 'debugger' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
