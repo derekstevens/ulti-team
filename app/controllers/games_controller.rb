@@ -1,6 +1,11 @@
 class GamesController < ApplicationController
 	before_filter :authenticate_captain!, :only => [:new, :create, :edit, :update, :destroy]
 
+	def index
+		@team = Team.find params[:team_id]
+		@games = @team.games
+	end
+
 	def new
 		@team = Team.find params[:team_id]
 		@game = Game.new

@@ -1,6 +1,29 @@
 require 'rails_helper'
 
 RSpec.describe GamesController, :type => :controller do
+
+	describe 'GET #index' do 
+		it "renders the :index templete with all games for a specific team" do
+			team = FactoryGirl.create(:team)
+
+			2.times { FactoryGirl.create(:game, team: team) }
+
+			get :index, team_id: team.id
+
+			expect(assigns(:games).count).to eq(2)
+		end
+		it "does not render the games of other teams" do 
+			team = FactoryGirl.create(:team)
+			team2 = FactoryGirl.create(:team)
+			2.times { FactoryGirl.create(:game, team: team) }
+			2.times { FactoryGirl.create(:game, team: team2) }
+
+			get :index, team_id: team.id
+
+			expect(assigns(:games).count).to eq(2)
+		end
+	end
+
 	describe 'GET #show' do 
 		it "assigns the requested game to @game" do 
 			game = FactoryGirl.create(:game)
