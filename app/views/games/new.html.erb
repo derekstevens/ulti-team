@@ -1,0 +1,14 @@
+<h1>New game</h1>
+
+<%= form_for ([@team, @game]) do |f| %>
+	<div><%= f.label :game_date %><br />
+	<%= f.date_select :game_date %></div>
+
+	<div><%= f.label :opponent_name %><br />
+	<%= f.text_field :opponent_name %></div>
+
+	<div><%= f.label :location %><br />
+	<%= f.text_field :location %></div>
+
+	<div><%= f.submit "Create game" %></div>
+<% end %>

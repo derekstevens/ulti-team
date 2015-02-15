@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
 	before_filter :authenticate_user!, :only => [:new, :create]
-	before_filter :authenticate_captain!, :only => [:edit, :update]
+	before_filter :authenticate_captain!, :only => [:edit, :update, :destroy]
 	
 	def show
 		@team = Team.find params[:id]
@@ -31,6 +31,10 @@ class TeamsController < ApplicationController
 		else 
 			render :edit
 		end
+	end
+
+	def destroy
+
 	end
 
 	private

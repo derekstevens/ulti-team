@@ -1,0 +1,22 @@
+<h1>Edit game</h1>
+
+<%= form_for ([@team, @game]) do |f| %>
+	<div><%= f.label :game_date %><br />
+	<%= f.date_select :game_date %></div>
+
+	<div><%= f.label :opponent_name %><br />
+	<%= f.text_field :opponent_name %></div>
+
+	<div><%= f.label :location %><br />
+	<%= f.text_field :location %></div>
+
+	<div>
+		<h4>Score</h4>
+		<%= f.label :team_score %> <%= f.number_field :team_score %><br>
+		<%= f.label :opponent_score %> <%= f.number_field :opponent_score %>
+	</div>
+
+	<div><%= f.submit "Update game" %></div>
+<% end %>
+
+<%= link_to "Delete", [@team, @game], method: :delete, data: { confirm: "You sure?" } %>
