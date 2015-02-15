@@ -1,5 +1,5 @@
 class TeamRostersController < ApplicationController
-
+	before_filter :authenticate_captain!, :only => [:new, :create]
 	def show
 		@team = Team.find(params[:team_id])
 		@team_roster = TeamRoster.find(params[:id])

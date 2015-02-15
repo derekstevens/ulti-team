@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations" }
   resources :users, :only => [:show]
-  resources :teams do 
+  resources :teams, :except => [:show, :edit, :update, :destroy] do 
     resources :team_rosters
     resources :games
   end
@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   get 'dashboard' => 'users#dashboard'
   # You can have the root of your site routed with "root"
-  
+  get 'teams/:team_id' => 'teams#show', as: :team
+  get 'teams/:team_id/edit' => 'teams#edit', as: :edit_team
+  delete 'teams/:team_id' => 'teams#destroy'
+  patch 'teams/:team_id' => 'teams#update'
+  put 'teams/:team_id' => 'teams#update'
 
   authenticated :user do 
     root to: 'users#dashboard', as: :authenticated_root

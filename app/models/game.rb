@@ -3,6 +3,6 @@ class Game < ActiveRecord::Base
 
 	validates :location, presence: true
 	validates :game_date, presence: true
-	validates :game_date, uniqueness: { scope: :team }
+	validates :game_date, schedule: true 
 
 end
