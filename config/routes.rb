@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :teams, :except => [:show, :edit, :update, :destroy] do 
     resources :team_rosters
     resources :games
+    resources :practices
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

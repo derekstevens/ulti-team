@@ -1,0 +1,7 @@
+<% @practices.each do |practice| %>
+	<div class="practice">
+		<h1><%= practice.practice_date %></h1>
+		<h2><%= practice.location %></h2>
+		<div class="map"></div>
+	</div>
+<% end %>

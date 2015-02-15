@@ -1,0 +1,13 @@
+<h1>Edit practice</h1>
+
+<%= form_for ([@team, @practice]) do |f| %>
+	<div><%= f.label :practice_date %><br />
+	<%= f.date_select :practice_date %></div>
+
+	<div><%= f.label :location %><br />
+	<%= f.text_field :location %></div>
+
+	<div><%= f.submit "Update practice" %></div>
+<% end %>
+
+<%= link_to "Delete", [@team, @practice], method: :delete, data: { confirm: "You sure?" } %>
