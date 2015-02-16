@@ -11,6 +11,8 @@ feature "Profile creation" do
 
 		expect(page).to have_content("Edit Profile")
 
+		expect(page).to_not have_content("Cancel my account")
+
 		fill_in "First name", :with => "Bob"
 		fill_in "Last name", :with => "Smith"
 
