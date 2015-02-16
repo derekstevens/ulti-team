@@ -38,4 +38,34 @@ RSpec.describe Game, :type => :model do
 
     expect(FactoryGirl.create(:practice, practice_date: Time.now.middle_of_day, team: game.team)).to_not be_new_record
   end
+
+  describe "Game scopes" do 
+    it "returns the correct wins" do 
+      team = FactoryGirl.create(:team)
+
+      3.times { FactoryGirl.create(:win, team: team) }
+      2.times { FactoryGirl.create(:lose, team: team) }
+
+      expect(team.games.wins.count).to eq(3)
+    end
+
+    it "does not return other teams wins" do 
+      team = FactoryGirl.create(:team)
+      team2 = FactoryGirl.create(:team)
+
+      3.times { FactoryGirl.create(:win, team: team) }
+      3.times { FactoryGirl.create(:win, team: team2) }
+
+      expect(team.games.wins.count).to eq(3)
+    end
+
+    it "returns the correct loses" do
+      team = FactoryGirl.create(:team)
+
+      3.times { FactoryGirl.create(:win, team: team) }
+      2.times { FactoryGirl.create(:lose, team: team) }
+
+      expect(team.games.loses.count).to eq(2) 
+    end
+  end
 end

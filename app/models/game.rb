@@ -5,4 +5,7 @@ class Game < ActiveRecord::Base
 	validates :game_date, presence: true
 	validates :game_date, schedule: true 
 
+	scope :wins, -> { where('team_score > opponent_score') }
+	scope :loses, -> { where('team_score < opponent_score') }
+
 end
