@@ -1,1 +1,7 @@
 <%= @team_roster.name %>
+
+<% if user_signed_in? %>
+	<% if current_user.is_captain?(@team) %>
+		<%= button_to "Copy", { action: "copy", team_id: @team.id, id: @team_roster.id }, data: { disable_with: 'Copying...' } %>
+	<% end %>
+<% end %>

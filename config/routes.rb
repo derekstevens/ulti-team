@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   delete 'teams/:team_id' => 'teams#destroy'
   patch 'teams/:team_id' => 'teams#update'
   put 'teams/:team_id' => 'teams#update'
+  post 'teams/:team_id/team_rosters/:id/copy' => 'team_rosters#copy'
 
   authenticated :user do 
     root to: 'users#dashboard', as: :authenticated_root

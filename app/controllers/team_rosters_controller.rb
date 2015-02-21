@@ -1,5 +1,5 @@
 class TeamRostersController < ApplicationController
-	before_filter :authenticate_captain!, :only => [:new, :create, :edit, :update, :destroy]
+	before_filter :authenticate_captain!, :only => [:new, :create, :edit, :update, :destroy, :copy]
 
 	def index
 		@team = Team.find(params[:team_id])
@@ -57,6 +57,23 @@ class TeamRostersController < ApplicationController
 
 		@team_roster.destroy
 		redirect_to @team
+	end
+
+	def copy
+		@team = Team.find params[:team_id]
+		@team_roster = TeamRoster.find params[:id]
+
+		@new_team_roster = @team_roster.dup
+		if @new_team_roster.save
+			@team_roster.rosters.each do |roster|
+				new_roster = Roster.new(team_roster_id: @new_team_roster.id, user_id: roster.user_id)
+				new_roster.captain = roster.captain
+				new_roster.save
+			end
+			redirect_to edit_team_team_roster_path(@team, @new_team_roster)
+		else
+			render :show
+		end
 	end
 
 
