@@ -1,5 +1,11 @@
 class TeamRostersController < ApplicationController
-	before_filter :authenticate_captain!, :only => [:new, :create]
+	before_filter :authenticate_captain!, :only => [:new, :create, :edit, :update, :destroy]
+
+	def index
+		@team = Team.find(params[:team_id])
+		@team_rosters = @team.team_rosters.order('created_at DESC') 
+	end
+
 	def show
 		@team = Team.find(params[:team_id])
 		@team_roster = TeamRoster.find(params[:id])
@@ -23,9 +29,35 @@ class TeamRostersController < ApplicationController
 		else
 			render :new
 		end
-
 	end
 
+	def edit
+		@team = Team.find params[:team_id]
+		@team_roster = TeamRoster.find params[:id]
+	end
+
+	def update
+		@team = Team.find params[:team_id]
+		@team_roster = TeamRoster.find params[:id]
+
+		if @team_roster.update_attributes team_roster_params
+			if @team_roster.current?
+				uncheck_old_roster_current(@team, @team_roster)
+				@team_roster.add_current_user_as_captain(current_user)
+			end
+			redirect_to team_team_roster_path(@team, @team_roster)
+		else
+			render :edit
+		end
+	end
+
+	def destroy
+		@team = Team.find params[:team_id]
+		@team_roster = TeamRoster.find params[:id]
+
+		@team_roster.destroy
+		redirect_to @team
+	end
 
 
 	private

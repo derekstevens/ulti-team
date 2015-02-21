@@ -1,0 +1,12 @@
+<h1>Edit Roster</h1>
+
+<%= form_for([@team, @team_roster]) do |f| %>
+	<div><%= f.label :name %><br />
+	<%= f.text_field :name, autofocus: true %></div>
+
+	<div><%= f.check_box :current %> <%= f.label :current %>
+		<p>If checked, this will be listed as your current roster. Only players listed on this roster will be considered on the team.</p>
+	</div>
+
+	<div><%= f.submit "Update" %></div>
+<% end %>
