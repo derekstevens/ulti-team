@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150215154050) do
+ActiveRecord::Schema.define(version: 20150221225603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,17 @@ ActiveRecord::Schema.define(version: 20150215154050) do
     t.string   "location"
     t.datetime "practice_date"
     t.integer  "team_id"
+  end
+
+  create_table "roster_invites", force: :cascade do |t|
+    t.string   "email"
+    t.integer  "team_roster_id"
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.string   "token"
+    t.boolean  "captain"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "rosters", force: :cascade do |t|

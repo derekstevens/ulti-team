@@ -9,6 +9,7 @@ class TeamRostersController < ApplicationController
 	def show
 		@team = Team.find(params[:team_id])
 		@team_roster = TeamRoster.find(params[:id])
+		@roster_invite = RosterInvite.new
 	end
 
 	def new

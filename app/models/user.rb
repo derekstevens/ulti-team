@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :rosters
+  has_many :team_rosters, through: :rosters 
+  has_many :roster_invitations, :class_name => "RosterInvite", :foreign_key => 'recipient_id'
+  has_many :sent_invites, :class_name => "RosterInvite", :foreign_key => 'sender_id'
 
   def full_name
   	"#{self.first_name} #{self.last_name}"

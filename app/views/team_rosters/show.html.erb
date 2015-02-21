@@ -3,5 +3,18 @@
 <% if user_signed_in? %>
 	<% if current_user.is_captain?(@team) %>
 		<%= button_to "Copy", { action: "copy", team_id: @team.id, id: @team_roster.id }, data: { disable_with: 'Copying...' } %>
+
+		<h1>Add player</h1>
+		<%= form_for @roster_invite, :url => roster_invites_path do |f| %>
+			<%= f.hidden_field :team_roster_id, value: params[:id] %>
+			<%= f.hidden_field :team_id, value: params[:team_id] %>
+
+			<div><%= f.label :email %>
+			<%= f.email_field :email, :placeholder => 'Enter email' %></div>
+
+			<%= f.check_box :captain %><%= f.label :captain %>
+
+			<%= f.submit 'Add player' %>
+		<% end %>
 	<% end %>
 <% end %>
