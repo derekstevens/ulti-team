@@ -28,6 +28,8 @@ gem 'simplecov-rcov'
 gem 'pg'
 gem 'bullet', :group => "development"
 gem 'quiet_assets', :group => "development"
+gem 'rubocop', :require => false
+gem 'rubocop-checkstyle_formatter', :require => false
 
 group :development, :test do
 	gem 'spring-commands-rspec'
