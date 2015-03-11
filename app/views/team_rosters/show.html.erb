@@ -15,13 +15,15 @@
 <% if user_signed_in? && current_user.is_captain?(@team) %>
 	<%= button_to "Copy", { action: "copy", team_id: @team.id, id: @team_roster.id }, data: { disable_with: 'Copying...' } %>
 
-	<h1>Add player</h1>
+	<h1>Add players</h1>
+	<p>Enter a single email, or a comma-separated list of emails</p>
+
 	<%= form_for @roster_invite, :url => roster_invites_path do |f| %>
 		<%= f.hidden_field :team_roster_id, value: params[:id] %>
 		<%= f.hidden_field :team_id, value: params[:team_id] %>
 
 		<div><%= f.label :email %>
-		<%= f.email_field :email, :placeholder => 'Enter email' %></div>
+		<%= f.text_area :email, :placeholder => 'Enter emails' %></div>
 
 		<%= f.check_box :captain %><%= f.label :captain %>
 
