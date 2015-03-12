@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature "roster invite" do 
   scenario "a captain invites a single user" do 
-    user = FactoryGirl.create(:user, email: "test@dgs.com", password: "fooman123")
+    user = FactoryGirl.create(:user, email: "test@dgs.com", password: "fooman123", first_name: "Derek")
     visit "/users/sign_in"
 
     fill_in "Email", :with => "test@dgs.com"
@@ -30,11 +30,12 @@ feature "roster invite" do
     fill_in "Email", :with => "testderek@dgs.com"
     click_button "Add player"
 
+    expect(page).to have_content("Derek")
     expect(page).to have_content("Bob")
   end
 
   scenario "a captain invites multiple users" do 
-    user = FactoryGirl.create(:user, email: "test@dgs.com", password: "fooman123")
+    user = FactoryGirl.create(:user, email: "test@dgs.com", password: "fooman123", first_name: "Derek")
     visit "/users/sign_in"
 
     fill_in "Email", :with => "test@dgs.com"
@@ -63,6 +64,7 @@ feature "roster invite" do
     fill_in "Email", :with => "testderek@dgs.com, testuser@dgs.com"
     click_button "Add player"
 
+    expect(page).to have_content("Derek")
     expect(page).to have_content("Bob")
     expect(page).to have_content("Joe")
   end
