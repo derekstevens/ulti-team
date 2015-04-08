@@ -9,3 +9,9 @@
 
 	<div><%= f.submit "Update team" %></div>
 <% end %>
+
+<% if current_user.id == @team.team_admin_id %>
+  <h3>Delete team</h3>
+
+  <p><%= button_to "Delete", team_path, data: { confirm: "Are you sure?" }, method: :delete %></p>
+<% end %>
