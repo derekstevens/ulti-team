@@ -12,6 +12,8 @@ class TeamsController < ApplicationController
 
 	def create
 		@team = Team.new team_params
+
+		@team.team_admin_id = current_user.id
 		if @team.save
 			create_default_team_roster(@team)
 			redirect_to @team
@@ -34,7 +36,10 @@ class TeamsController < ApplicationController
 	end
 
 	def destroy
+		@team = Team.find params[:team_id]
 
+		@team.destroy
+		redirect_to root_path
 	end
 
 	private
@@ -48,4 +53,5 @@ class TeamsController < ApplicationController
 			team_roster.save
 			team_roster.add_current_user_as_captain(current_user)
 		end
+
 end
