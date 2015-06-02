@@ -39,7 +39,7 @@ class TeamsController < ApplicationController
 		@team = Team.find params[:team_id]
 		@team_roster = @team.team_rosters.where("current = ?", true).first
 
-		@captains = @team_roster.rosters.where("captain = ?", true)
+		@captains = @team_roster.rosters.where("captain = ? AND user_id != ?", true, current_user.id)
 	end
 
 	def update_team_admin
