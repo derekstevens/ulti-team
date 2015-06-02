@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   get 'teams/:team_id' => 'teams#show', as: :team
   get 'teams/:team_id/edit' => 'teams#edit', as: :edit_team
+  get 'teams/:team_id/update_team_admin' => 'teams#edit_team_admin', as: :edit_team_admin
   delete 'teams/:team_id' => 'teams#destroy'
+  patch 'teams/:team_id/update_team_admin' => 'teams#update_team_admin'
   patch 'teams/:team_id' => 'teams#update'
   put 'teams/:team_id' => 'teams#update'
   post 'teams/:team_id/team_rosters/:id/copy' => 'team_rosters#copy'

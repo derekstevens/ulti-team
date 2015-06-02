@@ -3,4 +3,8 @@
 <% if user_signed_in? && current_user.is_captain?(@team) %>
 	<p><%= link_to 'Edit team', edit_team_path %></p>
 	<p><%= link_to 'New roster', new_team_team_roster_path(@team) %></p>
+	
+	<% if current_user.id == @team.team_admin_id %>
+  <p><%= link_to 'Update Team Admin', edit_team_admin_path %></p>
+<% end %>
 <% end %>

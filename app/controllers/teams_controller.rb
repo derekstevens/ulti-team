@@ -35,6 +35,24 @@ class TeamsController < ApplicationController
 		end
 	end
 
+	def edit_team_admin
+		@team = Team.find params[:team_id]
+		@team_roster = @team.team_rosters.where("current = ?", true).first
+
+		@captains = @team_roster.rosters.where("captain = ?", true)
+	end
+
+	def update_team_admin
+		@team = Team.find params[:team_id]
+		@team.team_admin_id = params[:team_admin_id]
+		if @team.save
+			redirect_to @team
+		else
+			render :edit_team_admin
+		end
+	end
+
+
 	def destroy
 		@team = Team.find params[:team_id]
 
@@ -45,7 +63,7 @@ class TeamsController < ApplicationController
 	private
 
 		def team_params
-			params.require(:team).permit(:name, :location)
+			params.require(:team).permit(:name, :location, :team_admin_id)
 		end
 
 		def create_default_team_roster(team)
