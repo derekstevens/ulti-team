@@ -1,1 +1,15 @@
-<h1><%= @user.full_name %>'s Dashboard</h1>
+<h1><%= current_user.full_name %>'s Dashboard</h1>
+
+<% @dashboard.teams.each do |team| %>
+	<div>
+		<h3><%= team.name %></h3> <span><%= link_to "Go to team profile", team_path(team) %></span>
+		<h5>Upcoming Games</h5>
+		<% @dashboard.next_games(team).each do |game| %>
+			<%= render 'game', game: game %>
+		<% end %>
+		<h5>Last Game</h5>
+		<% @dashboard.last_game(team).each do |game| %>
+			<%= render 'game', game: game %>
+		<% end %>
+	</div>
+<% end %>
