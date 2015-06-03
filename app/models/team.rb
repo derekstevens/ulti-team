@@ -6,5 +6,6 @@ class Team < ActiveRecord::Base
 	
 	validates :name, presence: true
 	validates :location, presence: true
+	validates :team_admin_id, presence: true
 
 end

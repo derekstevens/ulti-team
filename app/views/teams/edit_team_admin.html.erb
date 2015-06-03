@@ -1,11 +1,20 @@
 <h1>Edit Team Admin</h1>
 
-<%= form_for @team, :url => {:action => 'update_team_admin'} do |f| %>
-	<div><%= f.label :team_admin_id, "Select New Admin" %></div>
-	<% @captains.includes(:user).each do |captain| %>
-		<div><%= radio_button_tag 'team_admin_id', captain.user_id %>
-		<%= f.label captain.user.full_name %></div>
-	<% end %>
+<% if @captains.empty? %>
+	<div>You are the only captain. Please add another captain before attempting to transfer team ownership.</div>
+<% else %>
+	<%= form_for @team, :url => {:action => 'update_team_admin'} do |f| %>
+		<% if @team.errors.any? %>
+			<% @team.errors.full_messages.each do |msg| %>
+				<p><%= msg %></p>
+			<% end %>
+		<% end %>
+		<div><%= f.label :team_admin_id, "Select New Admin" %></div>
+		<% @captains.includes(:user).each do |captain| %>
+			<div><%= radio_button_tag 'team_admin_id', captain.user_id %>
+			<%= f.label captain.user.full_name %></div>
+		<% end %>
 
-	<div><%= f.submit "Update" %></div>
+		<div><%= f.submit "Update" %></div>
+	<% end %>
 <% end %>

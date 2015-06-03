@@ -45,9 +45,11 @@ class TeamsController < ApplicationController
 	def update_team_admin
 		@team = Team.find params[:team_id]
 		@team.team_admin_id = params[:team_admin_id]
+		@team_roster = @team.team_rosters.where("current = ?", true).first
 		if @team.save
 			redirect_to @team
 		else
+			@captains = @team_roster.rosters.where("captain = ? AND user_id != ?", true, current_user.id)
 			render :edit_team_admin
 		end
 	end
