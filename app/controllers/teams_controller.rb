@@ -1,9 +1,15 @@
 class TeamsController < ApplicationController
 	before_filter :authenticate_user!, :only => [:new, :create]
-	before_filter :authenticate_captain!, :only => [:edit, :update, :destroy]
+	before_filter :authenticate_captain!, :only => [:edit, :update, :destroy, :dashboard]
 	
 	def show
 		@team = Team.find params[:team_id]
+	end
+
+	def dashboard
+		@team = Team.find params[:team_id]
+
+		@dashboard = TeamDashboard.new(@team)
 	end
 	
 	def new

@@ -6,6 +6,7 @@ class ScheduleValidator < ActiveModel::EachValidator
 				record.errors[:attribute] << "Practice already scheduled at this time."
 			end
 		end
+
 		team.games.each do |game|
 			if value == game.game_date
 				record.errors[:attribute] << "Game already scheduled at this time."

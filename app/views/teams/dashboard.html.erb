@@ -1,0 +1,17 @@
+<h1><%= @dashboard.team.name %></h1>
+
+<h3>Upcoming Games</h3>
+<% @dashboard.next_games(@team).each do |game| %>
+	<%= render 'game', game: game %>
+<% end %>
+<span><%= link_to 'New Game', new_team_game_path(@team) %></span>
+
+<h3>Last Game</h3>
+<% @dashboard.last_game(@team).each do |game| %>
+	<%= render 'game', game: game %>
+<% end %>
+
+<h3>Roster</h3>
+<% @dashboard.roster(@team).includes(:user).each do |roster| %>
+	<p><%= roster.user.full_name %></p>
+<% end %>
