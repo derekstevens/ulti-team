@@ -32,7 +32,7 @@ class PracticesController < ApplicationController
 
 	def create
 		@team = Team.find params[:team_id]
-		@practice = Practice.create practice_params
+		@practice = Practice.new practice_params
 		@practice.team_id = @team.id
 		if @practice.save
 			redirect_to team_practice_path(@team, @practice)

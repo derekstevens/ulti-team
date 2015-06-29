@@ -13,7 +13,7 @@ class GamesController < ApplicationController
 
 	def create
 		@team = Team.find params[:team_id]
-		@game = Game.create game_params
+		@game = Game.new game_params
 		@game.team_id = @team.id
 		if @game.save
 			redirect_to team_game_path(@team, @game)
