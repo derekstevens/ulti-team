@@ -2,21 +2,32 @@
 
 <% @dashboard.teams.each do |team| %>
 	<% if current_user.is_captain?(team) %>
-		<div class="captain-dash">
-			<h3><%= team.name %></h3> 
-			<span><%= link_to "Go to team profile", team_path(team) %> | <%= link_to "Go to team dashboard", team_dashboard_path(team) %></span>
-			<h5>Upcoming Games</h5>
-			<% @dashboard.next_games(team).each do |game| %>
-				<%= render 'game', game: game %>
-			<% end %>
+		<div class="captain-dash user-flex-boxes">
+			<a href="javascript:void(0)" class="flex-box flex-box-big">
+				<img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_2_dark.png" alt="">
+				<h1 class="flex-title"><%= team.name %></h1>
+				<p><%= link_to "Go to team profile", team_path(team) %> | <%= link_to "Go to team dashboard", team_dashboard_path(team) %></p>
+			</a>
+			<a href="javascript:void(0)" class="flex-box">
+				<img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1_dark.png" alt="">
+				<h3 class="flex-title">Upcoming Games</h3>
+				<% @dashboard.next_games(team).each do |game| %>
+					<%= render 'game', game: game %>
+				<% end %>
+			</a>
+			<a href="javascript:void(0)" class="flex-box">
+				<img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1_dark.png" alt="">
+				<h3 class="flex-title">Last Games</h3>
+				<% @dashboard.last_game(team).each do |game| %>
+					<%= render 'game', game: game %>
+				<% end %>
+			</a>
+		</div>
 
-			<h5>Last Game</h5>
-			<% @dashboard.last_game(team).each do |game| %>
-				<%= render 'game', game: game %>
-			<% end %>
+			
 
 
-			<div>
+			<div class="quick-links">
 				Quick Links: <%= link_to	"Rosters", team_team_rosters_path(team) %> | <%= link_to "Games", team_games_path(team) %> | <%= link_to "Practices", team_practices_path(team) %>
 			</div>
 		</div>

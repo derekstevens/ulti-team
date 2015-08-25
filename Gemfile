@@ -11,10 +11,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rails-html-sanitizer', '~> 1.0'
-gem 'bourbon'
-gem 'bitters'
-gem 'neat'
-gem 'refills'
 gem 'devise'
 gem 'local_time'
 gem 'money-rails'
@@ -30,6 +26,7 @@ gem 'bullet', :group => "development"
 gem 'quiet_assets', :group => "development"
 gem 'rubocop', :require => false
 gem 'rubocop-checkstyle_formatter', :require => false
+gem 'bootstrap-sass'
 
 group :development, :test do
 	gem 'spring-commands-rspec'
