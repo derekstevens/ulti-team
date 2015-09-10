@@ -27,6 +27,8 @@ gem 'quiet_assets', :group => "development"
 gem 'rubocop', :require => false
 gem 'rubocop-checkstyle_formatter', :require => false
 gem 'bootstrap-sass'
+gem 'wow-rails'
+gem 'animate-rails'
 
 group :development, :test do
 	gem 'spring-commands-rspec'

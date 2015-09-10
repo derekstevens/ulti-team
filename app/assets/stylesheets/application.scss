@@ -16,11 +16,9 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "animate";
 @import "navbar.scss";
-
-body {
-	background-color: #000;
-}
+@import "landingpage.scss";
 
 
 
