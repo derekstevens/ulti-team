@@ -1,0 +1,27 @@
+<nav class="navbar-side" role="navigation">
+	<div class="navbar-collapse sidebar-collapse collapse">
+		<ul id="side" class="nav navbar-nav side-nav">
+			<li class="side-user hidden-xs">
+				<%= image_tag("user_image.jpg", size: "150", class: "img-circle") %>
+				<p class="welcome">
+					<i class="fa fa-key"></i> Logged in as
+				</p>
+				<p class="name tooltip-sidebar-logout">
+					<%= current_user.first_name %>
+					<span class="last-name"><%= current_user.last_name %></span> 
+					<%= link_to(destroy_user_session_path, :method => :delete, class: "logout-open", data: { toggle: "tooltip", placement: "top"}) do %>
+            <i class="fa fa-sign-out"></i>
+          <% end %>
+        </p>
+        <div class="clearfix"></div>
+      </li>
+
+      <li>
+      	<%= link_to(root_path) do %>
+      		<i class="fa fa-dashboard"></i> Dashboard
+      	<% end %>
+      </li>
+    </ul>
+  </div>
+</nav>
+

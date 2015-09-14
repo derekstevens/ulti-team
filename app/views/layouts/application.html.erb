@@ -6,10 +6,18 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body id="page-top wrapper">
+<body id="page-top" class="wrapper">
 <%= render 'layouts/navigation' %>
 
-<%= yield %>
+<% if !user_signed_in? %>
+	<%= yield %>
+<% else %>
+	<div id="page-wrapper">
+		<div class="page-content">
+			<%= yield %>
+		</div>
+	</div>
+<% end %>
 
 </body>
 </html>
