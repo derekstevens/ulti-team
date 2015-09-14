@@ -1,51 +1,141 @@
 
-	<h1><%= current_user.full_name %>'s Dashboard</h1>
 
-	<% @dashboard.teams.each do |team| %>
-		<% if current_user.is_captain?(team) %>
-			<div class="captain-dash user-flex-boxes">
-				<a href="javascript:void(0)" class="flex-box flex-box-big">
-					<img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_2_dark.png" alt="">
-					<h1 class="flex-title"><%= team.name %></h1>
-					<p><%= link_to "Go to team profile", team_path(team) %> | <%= link_to "Go to team dashboard", team_dashboard_path(team) %></p>
-				</a>
-				<a href="javascript:void(0)" class="flex-box">
-					<img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1_dark.png" alt="">
-					<h3 class="flex-title">Upcoming Games</h3>
-					<% @dashboard.next_games(team).each do |game| %>
-						<%= render 'game', game: game %>
-					<% end %>
-				</a>
-				<a href="javascript:void(0)" class="flex-box">
-					<img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1_dark.png" alt="">
-					<h3 class="flex-title">Last Games</h3>
-					<% @dashboard.last_game(team).each do |game| %>
-						<%= render 'game', game: game %>
-					<% end %>
-				</a>
-			</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="page-title">
+			<h1><%= current_user.full_name %>'s Dashboard</h1>
+		</div>
+	</div>
+</div>
 
-				
+<% @dashboard.teams.each do |team| %>
+	<% if current_user.is_captain?(team) %>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="team-dashboard">
+					<div class="row">
+						<div class="col-lg-10 ">	
+							<div class="team-dashboard-title dark-gray">
+								<h3><%= team.name %></h3>
+							</div>
+						</div>
+					</div>
 
+					<div class="row">
+						<div class="col-lg-2 col-sm-6">
+							<div class="circle-tile">
+								<%= link_to(root_path) do %>
+									<div class="circle-tile-heading green">
+										<i class="fa fa-envelope fa-fw fa-3x"></i>
+									</div>
+								<% end %>
+								<div class="circle-tile-content green">
+									<div class="circle-tile-description text-faded">
+										Messages
+									</div>
+									<div class="circle-tile-number text-faded">
+										0 New
+									</div>
+									<%= link_to(root_path, class: "circle-tile-footer") do %>
+										More Info <i class="fa fa-chevron-circle-right"></i>
+									<% end %>
+							</div>
+						</div>
+					</div>
 
-				<div class="quick-links">
-					Quick Links: <%= link_to	"Rosters", team_team_rosters_path(team) %> | <%= link_to "Games", team_games_path(team) %> | <%= link_to "Practices", team_practices_path(team) %>
+					<div class="row">
+						<div class="col-lg-2 col-sm-6">
+							<div class="circle-tile">
+								<%= link_to(root_path) do %>
+									<div class="circle-tile-heading orange">
+										<i class="fa fa-bell fa-fw fa-3x"></i>
+									</div>
+								<% end %>
+								<div class="circle-tile-content orange">
+									<div class="circle-tile-description text-faded">
+										Alerts
+									</div>
+									<div class="circle-tile-number text-faded">
+										0 New
+									</div>
+									<%= link_to(root_path, class: "circle-tile-footer") do %>
+										More Info <i class="fa fa-chevron-circle-right"></i>
+									<% end %>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-lg-2 col-sm-6">
+							<div class="circle-tile">
+								<%= link_to(root_path) do %>
+									<div class="circle-tile-heading blue">
+										<i class="fa fa-calendar fa-fw fa-3x"></i>
+									</div>
+								<% end %>
+								<div class="circle-tile-content blue">
+									<div class="circle-tile-description text-faded">
+										Schedule
+									</div>
+									<div class="circle-tile-number text-faded">
+										<%= @dashboard.next_games(team).count %> Upcoming
+									</div>
+									<%= link_to(root_path, class: "circle-tile-footer") do %>
+										More Info <i class="fa fa-chevron-circle-right"></i>
+									<% end %>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-		<% else %>
-			<div class="player-dash">
-				<h3><%= team.name %></h3> <span><%= link_to "Go to team profile", team_path(team) %></span>
-				<h5>Upcoming Games</h5>
+		</div>
+
+
+
+
+
+
+
+		<div class="captain-dash user-flex-boxes">
+				<p><%= link_to "Go to team profile", team_path(team) %> | <%= link_to "Go to team dashboard", team_dashboard_path(team) %></p>
+			</a>
+			<a href="javascript:void(0)" class="flex-box">
+				<img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1_dark.png" alt="">
+				<h3 class="flex-title">Upcoming Games</h3>
 				<% @dashboard.next_games(team).each do |game| %>
 					<%= render 'game', game: game %>
 				<% end %>
-
-				<h5>Last Game</h5>
+			</a>
+			<a href="javascript:void(0)" class="flex-box">
+				<img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1_dark.png" alt="">
+				<h3 class="flex-title">Last Games</h3>
 				<% @dashboard.last_game(team).each do |game| %>
 					<%= render 'game', game: game %>
 				<% end %>
+			</a>
+		</div>
 
+			
+
+
+			<div class="quick-links">
+				Quick Links: <%= link_to	"Rosters", team_team_rosters_path(team) %> | <%= link_to "Games", team_games_path(team) %> | <%= link_to "Practices", team_practices_path(team) %>
 			</div>
-		<% end %>
+		</div>
+	<% else %>
+		<div class="player-dash">
+			<h3><%= team.name %></h3> <span><%= link_to "Go to team profile", team_path(team) %></span>
+			<h5>Upcoming Games</h5>
+			<% @dashboard.next_games(team).each do |game| %>
+				<%= render 'game', game: game %>
+			<% end %>
+
+			<h5>Last Game</h5>
+			<% @dashboard.last_game(team).each do |game| %>
+				<%= render 'game', game: game %>
+			<% end %>
+
+		</div>
 	<% end %>
+<% end %>
 

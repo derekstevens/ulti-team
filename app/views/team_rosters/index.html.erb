@@ -1,5 +1,11 @@
-<% @team_rosters.each do |team_roster| %>
-	<div>
-		<h1><%= team_roster.name %></h1>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="page-title">
+			<% @team_rosters.each do |team_roster| %>
+				<div>
+					<h1><%= team_roster.name %></h1>
+				</div>
+			<% end %>
+		</div>
 	</div>
-<% end %>
+</div>
