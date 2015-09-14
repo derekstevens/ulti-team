@@ -17,8 +17,14 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "animate";
+@import "font-awesome";
 @import "navbar.scss";
 @import "landingpage.scss";
+@import "dashboardnav.scss";
+
+body {
+	font-family: Merriweather, 'Helvetica Neue', Arial, sans-serif;
+}
 
 
 
