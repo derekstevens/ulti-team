@@ -1,77 +1,93 @@
-<section>
-	<div class="hero">
-		<div class="hero-inner">
-			<div class="hero-logo"><h1>UltiTeam</h1></div>
-			<div class="hero-copy">
-				<h2>The Ultimate Team Management App</h2>
-				<p>Easy, effective tools to manage your team and keep your focus on the field</p>
-			</div>
-			<button>Learn More</button>
+<header>
+	<div class="header-content">
+		<div class="header-content-inner">
+			<h1>Ulti Team</h1>
+			<hr>
+			<p>The ultimate team management solution</p>
+			<%= link_to('Sign Up', new_user_registration_path, class: "btn btn-primary btn-xl page-scroll") %>
 		</div>
 	</div>
+</header>
 
-	<ul class="bullets">
-		<li class="bullet three-col-bullet">
-			<div class="bullet-icon bullet-icon-1">
-				<img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_2.png
-" alt="">
-	    </div>
-	    <div class="bullet-content">
-	      <h2>This Bullet Title</h2>
-	      <p>Lorem dolor sit amet consectetur adipisicing elit. Doloremque, minus, blanditiis, voluptatibus nulla quia ipsam sequi quos iusto aliquam iste magnam accusamus molestias quo illum impedit. Odit officia autem.</p>
-	      </div>
-	  </li>  
-	  <li class="bullet three-col-bullet">
-	    <div class="bullet-icon bullet-icon-2">
-	      <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_3.png" alt="">
-	    </div>
-	    <div class="bullet-content">
-	      <h2>Another Bullet Title</h2>
-	      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, minus, blanditiis, voluptatibus nulla quia ipsam sequi quos iusto aliquam iste magnam accusamus molestias quo illum.</p>
-	    </div>
-	  </li>
-	  <li class="bullet three-col-bullet">
-	    <div class="bullet-icon bullet-icon-3">
-	      <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_4.png" alt="">
-	    </div>
-	    <div class="bullet-content">
-	      <h2>Last Bullet Title</h2>
-	      <p>Lorem ipsum sit amet consectetur adipisicing elit. Doloremque, minus, blanditiis, voluptatibus nulla quia ipsam sequi quos iusto aliquam iste magnam accusamus molestias quo illum impedit. Odit officia autem.</p>
-	    </div>
-	  </li> 
-	</ul>
-
-	<div class="hero">
-		<div class="hero-inner">
+<section class="bg-primary" id="about">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2 text-center">
+				<h2 class="section-heading">Your one-stop solution!</h2>
+				<hr class="light">
+				<p class="text-faded">No more managing Google Spreadsheets, email chains, Google Groups.</p>
+			</div>
 		</div>
 	</div>
-
-	<div class="browsers">
-		<div class="browser">
-			<div class="browser-top-bar">
-				<div class="browser-circle"></div>
-				<div class="browser-circle"></div>
-				<div class="browser-circle"></div>
-			</div>
-			<div class="browser-content"></div>
-		</div>
-		<div class="browser">
-			<div class="browser-top-bar">
-				<div class="browser-circle"></div>
-				<div class="browser-circle"></div>
-				<div class="browser-circle"></div>
-			</div>
-			<div class="browser-content"></div>
-		</div>
-		<div class="browser">
-			<div class="browser-top-bar">
-				<div class="browser-circle"></div>
-				<div class="browser-circle"></div>
-				<div class="browser-circle"></div>
-			</div>
-			<div class="browser-content"></div>
-		</div>
-	</div>
-
-	<div class="cover"></div>
 </section>
+
+<section id="features">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<h2 class="section-heading">Everything You Need to Manage Your Team, Hassle-Free</h2>
+				<hr class="primary">
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 text-center">
+				<div class="feature-box">
+					<i class="fa fa-4x fa-diamond wow bounceIn text-primary"></i>
+					<h3>Example</h3>
+					<p class="text-muted">Track attendance for games, practices and bar nights</p>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6 text-center">
+				<div class="feature-box">
+					<i class="fa fa-4x fa-paper-plane wow bounceIn text-primary" data-wow-delay=".1s"></i>
+					<h3>Example 2</h3>
+					<p class="text-muted">Email and message teammates right from the site</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="no-padding" id="team">
+	<div class="container-fluid">
+		<div class="row no-gutter">
+			<div class="col-lg-4 col-sm-6">
+				<a href="#" class="team-box">
+					<img src="" class="img-responsive" alt="">
+					<div class="team-box-caption">
+						<div class="team-box-caption-content">
+							<div class="team-name">
+								Bruises
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-4 col-sm-6">
+				<a href="#" class="team-box">
+					<img src="" class="img-responsive" alt="">
+					<div class="team-box-caption">
+						<div class="team-box-caption-content">
+							<div class="team-name">
+								Flowchart
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<aside class="bg-dark">
+	<div class="container text-center">
+		<div class="call-to-action">
+			<h2>Start for free now!</h2>
+			<%= link_to('Sign Up', new_user_registration_path, class: "btn btn-default btn-xl wow tada") %>
+		</div>
+	</div>
+</aside>
+
