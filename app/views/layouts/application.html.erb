@@ -6,12 +6,22 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body id="page-top">
+<body id="page-top" class="wrapper">
 <%= render 'layouts/navigation' %>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
 
-<%= yield %>
+<% if !user_signed_in? %>
+	<p class="notice"><%= notice %></p>
+	<p class="alert"><%= alert %></p>
+	<%= yield %>
+<% else %>
+	<div id="page-wrapper">
+		<div class="page-content-ease-in">
+			<p class="notice"><%= notice %></p>
+			<p class="alert"><%= alert %></p>
+			<%= yield %>
+		</div>
+	</div>
+<% end %>
 
 </body>
 </html>

@@ -1,49 +1,292 @@
-<h1><%= current_user.full_name %>'s Dashboard</h1>
+
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="page-title">
+			<h1><%= current_user.full_name %>'s Dashboard</h1>
+		</div>
+	</div>
+</div>
 
 <% @dashboard.teams.each do |team| %>
-	<% if current_user.is_captain?(team) %>
-		<div class="captain-dash user-flex-boxes">
-			<a href="javascript:void(0)" class="flex-box flex-box-big">
-				<img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_2_dark.png" alt="">
-				<h1 class="flex-title"><%= team.name %></h1>
-				<p><%= link_to "Go to team profile", team_path(team) %> | <%= link_to "Go to team dashboard", team_dashboard_path(team) %></p>
-			</a>
-			<a href="javascript:void(0)" class="flex-box">
-				<img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1_dark.png" alt="">
-				<h3 class="flex-title">Upcoming Games</h3>
-				<% @dashboard.next_games(team).each do |game| %>
-					<%= render 'game', game: game %>
-				<% end %>
-			</a>
-			<a href="javascript:void(0)" class="flex-box">
-				<img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1_dark.png" alt="">
-				<h3 class="flex-title">Last Games</h3>
-				<% @dashboard.last_game(team).each do |game| %>
-					<%= render 'game', game: game %>
-				<% end %>
-			</a>
-		</div>
-
+	<div class="row">
+		<div class="col-lg-10 col-lg-offset-1">	
 			
+			<div class="portlet portlet-default">
+				
+				<div class="portlet-heading">
+					<div class="portlet-title">
+						<h4><%= team.name %></h4>
 
+					</div>
+					<div class="portlet-widgets">
+						<% if current_user.is_captain?(team) %>
+							<span class="badge green">Captain</span>
+						<% end %>
+						<span class="divider"></span>
+						<a data-toggle="collapse" data-parent="#accordion" href="#portlet-<%= team.id %>">
+							<i class="fa fa-chevron-down"></i>
+						</a>
+					</div>
+					<div class="clearfix"></div>
+				</div>
 
-			<div class="quick-links">
-				Quick Links: <%= link_to	"Rosters", team_team_rosters_path(team) %> | <%= link_to "Games", team_games_path(team) %> | <%= link_to "Practices", team_practices_path(team) %>
+				<div id="portlet-<%= team.id %>" class="panel-collapse collapse in">
+					<div class="portlet-body">
+									
+						<div class="row"> <!-- STARTOF circle widgets -->
+							<div class="col-lg-2 col-lg-offset-3 col-sm-6">
+								<div class="circle-tile">
+									<%= link_to(root_path) do %>
+										<div class="circle-tile-heading green">
+											<i class="fa fa-envelope fa-fw fa-3x"></i>
+										</div>
+									<% end %>
+									<div class="circle-tile-content green">
+										<div class="circle-tile-description text-faded">
+											Messages
+										</div>
+										<div class="circle-tile-number text-faded">
+											0 New
+										</div>
+										<%= link_to(root_path, class: "circle-tile-footer") do %>
+											More Info <i class="fa fa-chevron-circle-right"></i>
+										<% end %>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-lg-2 col-sm-6">
+								<div class="circle-tile">
+									<%= link_to(root_path) do %>
+										<div class="circle-tile-heading orange">
+											<i class="fa fa-bell fa-fw fa-3x"></i>
+										</div>
+									<% end %>
+									<div class="circle-tile-content orange">
+										<div class="circle-tile-description text-faded">
+											Alerts
+										</div>
+										<div class="circle-tile-number text-faded">
+											0 New
+										</div>
+										<%= link_to(root_path, class: "circle-tile-footer") do %>
+											More Info <i class="fa fa-chevron-circle-right"></i>
+										<% end %>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-lg-2 col-sm-6">
+								<div class="circle-tile">
+									<%= link_to(root_path) do %>
+										<div class="circle-tile-heading blue">
+											<i class="fa fa-trophy fa-fw fa-3x"></i>
+										</div>
+									<% end %>
+									<div class="circle-tile-content blue">
+										<div class="circle-tile-description text-faded">
+											Record
+										</div>
+										<div class="circle-tile-number text-faded">
+											<%= team.games.wins.count %> - <%= team.games.loses.count %>
+										</div>
+										<%= link_to(root_path, class: "circle-tile-footer") do %>
+											More Info <i class="fa fa-chevron-circle-right"></i>
+										<% end %>
+									</div>
+								</div>
+							</div>
+						</div> <!-- ENDOF circle widgets -->
+
+						<div class="row"> <!-- STARTOF schedule widgets -->
+							<div class="col-lg-4">
+								<div class="portlet portlet-default">
+									<div class="portlet-heading">
+										<div class="portlet-title">
+											<h4>Upcoming Games</h4>
+										</div>
+										<div class="portlet-widgets">
+											<% if current_user.is_captain?(team) %>
+												<%= link_to 'Create Game', new_team_game_path(team), class: "badge" %>
+											<% end %>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="portlet-body">
+										<% if team.games.upcoming_games.count > 0 %>
+										<div class="table-responsive">
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>Date</th>
+														<th>Opponent</th>
+														<th>Location</th>
+														<% if current_user.is_captain?(team) %>
+														<th>Actions</th>
+														<% end %>
+													</tr>
+												</thead>
+												<tbody>
+													<% team.games.upcoming_games.each do |game| %>
+													  <tr>
+															<td><%= game.game_date.strftime("%^a, %^b %d") %></td>
+															<td><%= game.opponent_name %></td>
+															<td><%= game.location %></td>
+															
+															<td>
+																<%= link_to 'View Details', team_game_path(team, game) %>
+																<% if current_user.is_captain?(team) %>
+																| <%= link_to 'Edit', edit_team_game_path(team, game) %>
+																<% end %>
+															</td>
+															
+														</tr>
+													<% end %>
+												<tbody>
+											</table>
+										</div>
+										<% else %>
+										
+											<p class="alert alert-info">
+												No upcoming games. 
+												<% if current_user.is_captain?(team) %>
+													<%= link_to 'Schedule one now!', new_team_game_path(team), class: 'alert-link' %>
+												<% end %>
+											</p>
+										
+										<% end %>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-lg-4">
+								<div class="portlet portlet-default">
+									<div class="portlet-heading">
+										<div class="portlet-title">
+											<h4>Past Games</h4>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="portlet-body">
+										<% if team.games.past_games.count > 0 %>
+										<div class="table-responsive">
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>Date</th>
+														<th>Opponent</th>
+														<th>Score</th>
+														<% if current_user.is_captain?(team) %>
+														<th>Actions</th>
+														<% end %>
+													</tr>
+												</thead>
+												<tbody>
+													<% team.games.past_games.each do |game| %>
+													  <tr>
+															<td><%= game.game_date.strftime("%^a, %^b %d") %></td>
+															<td><%= game.opponent_name %></td>
+															<td><%= "#{game.team_score} - #{game.opponent_score}" %></td>
+															
+															<td>
+																<%= link_to 'View Details', team_game_path(team, game) %>
+																<% if current_user.is_captain?(team) %>
+																| <%= link_to 'Edit', edit_team_game_path(team, game) %>
+																<% end %>
+															</td>
+															
+														</tr>
+													<% end %>
+												<tbody>
+											</table>
+										</div>
+										<% else %>
+										
+											<p class="alert alert-info">
+												No past games.
+											</p>
+										
+										<% end %>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-lg-4">
+								<div class="portlet portlet-default">
+									<div class="portlet-heading">
+										<div class="portlet-title">
+											<h4>Upcoming Practices</h4>
+										</div>
+										<div class="portlet-widgets">
+											<% if current_user.is_captain?(team) %>
+												<%= link_to 'Create Practice', new_team_practice_path(team), class: "badge" %>
+											<% end %>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="portlet-body">
+										<% if team.practices.upcoming_practices.count > 0 %>
+										<div class="table-responsive">
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>Date</th>
+														<th>Location</th>
+														<% if current_user.is_captain?(team) %>
+														<th>Actions</th>
+														<% end %>
+													</tr>
+												</thead>
+												<tbody>
+													<% team.practices.upcoming_practices.each do |practice| %>
+													  <tr>
+															<td><%= practice.practice_date.strftime("%^a, %^b %d") %></td>
+															<td><%= practice.location %></td>
+															
+															<td>
+																<%= link_to 'View Details', team_game_path(team, practice) %>
+																<% if current_user.is_captain?(team) %>
+																| <%= link_to 'Edit', edit_team_practice_path(team, practice) %>
+																<% end %>
+															</td>
+															
+														</tr>
+													<% end %>
+												<tbody>
+											</table>
+										</div>
+										<% else %>
+										
+											<p class="alert alert-info">
+												No upcoming practices.
+												<% if current_user.is_captain?(team) %>
+													<%= link_to 'Schedule one now!', new_team_practice_path(team), class: 'alert-link' %>
+												<% end %>
+											</p>
+										
+										<% end %>
+									</div>
+								</div>
+							</div>
+						</div> <!-- ENDOF schedule widgets -->
+
+					</div>
+				</div>
+
+				<div class="portlet-footer">
+					<%= link_to	"Rosters", team_team_rosters_path(team) %> | 
+					<%= link_to "Games", team_games_path(team) %> | 
+					<%= link_to "Practices", team_practices_path(team) %>
+					<% if current_user.is_captain?(team) %>
+						<span class="portlet-quicklinks-right">
+							<%= link_to "Go to team dashboard", team_dashboard_path(team) %>
+						</span>
+					<% end %>
+				</div>
 			</div>
 		</div>
-	<% else %>
-		<div class="player-dash">
-			<h3><%= team.name %></h3> <span><%= link_to "Go to team profile", team_path(team) %></span>
-			<h5>Upcoming Games</h5>
-			<% @dashboard.next_games(team).each do |game| %>
-				<%= render 'game', game: game %>
-			<% end %>
-
-			<h5>Last Game</h5>
-			<% @dashboard.last_game(team).each do |game| %>
-				<%= render 'game', game: game %>
-			<% end %>
-
-		</div>
-	<% end %>
+	</div>
+	
 <% end %>
+

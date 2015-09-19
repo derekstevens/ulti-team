@@ -1,26 +1,137 @@
-<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
-				<span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-    	</button>
-    	<%= link_to('Ulti Team', root_path, class: "navbar-brand page-scroll") %>
-    </div>
+<% if !user_signed_in? %>
+  <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+  	<div class="container-fluid">
+  		<div class="navbar-header">
+  			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+  				<span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+      	</button>
+      	<%= link_to('Ulti Team', root_path, class: "navbar-brand page-scroll") %>
+      </div>
 
-    <div class="collapse navbar-collapse" id="navbar-collapse-1">
-    	<ul class="nav navbar-nav navbar-right">
-    		<% if user_signed_in? %>
-    			<li><%= link_to 'Dashboard', dashboard_path %></li>
-    			<li><%= link_to('Sign Out', destroy_user_session_path, :method => :delete) %></li>
-    		<% else %>
-    			<li><%= link_to('Sign Up', new_user_registration_path) %></li>
-    			<li><%= link_to('Sign In', new_user_session_path) %></li>
-    		<% end %>
-    	</ul>
+      <div class="collapse navbar-collapse" id="navbar-collapse-1">
+      	<ul class="nav navbar-nav navbar-right">
+  			 <li><%= link_to('Sign Up', new_user_registration_path) %></li>
+  			 <li><%= link_to('Sign In', new_user_session_path) %></li>
+      	</ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
+
+<% else %>
+<div class="dashboard-nav">
+  <nav class="navbar-top" role="navigation">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle pull-right" data-toggle="collapse" data-target=".sidebar-collapse">
+        <i class="fa fa-bars"></i> Menu
+      </button>
+
+      <div class="navbar-brand">
+        <%= link_to 'Ulti Team', root_path %>
+      </div>
+    </div>
+    
+    <div class="nav-top">
+      <ul class="nav navbar-left">
+        <li class="tooltip-sidebar-toggle">
+          <a href="#" id="sidebar-toggle" data-toggle="tooltip" data-placement="right" title="Sidebar Toggle">
+            <i class="fa fa-bars"></i>
+          </a>
+        </li>
+      </ul>
+      
+      <ul class="nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="messages-link dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-envelope"></i>
+            <span class="number">0</span> <i class="fa fa-caret-down"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-scroll dropdown-messages">
+            <li class="dropdown-header">
+              <i class="fa fa-envelope"></i> 0 New Messages
+            </li>
+            <li id="messageScroll">
+              <ul class="list-unstyled">
+                <!-- foreach loop here for user messages -->
+              </ul>
+            </li>
+
+            <li class="dropdown-footer">
+              <!-- link_to user_messages_path -->
+              <%= link_to 'Read All Messages', root_path %>
+            </li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="alerts-link dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-bell"></i>
+            <span class="number">0</span> <i class="fa fa-caret-down"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-scroll dropdown-alerts">
+            <li class="dropdown-header">
+              <i class="fa fa-bell"></i> 0 New Alerts
+            </li>
+            <li id="alertScroll">
+              <ul class="list-unstyled">
+                <!-- foreach loop here for user alerts -->
+              </ul>
+            </li>
+
+            <li class="dropdown-footer">
+              <!-- link_to user_alerts_path -->
+              <%= link_to 'View All Alerts', root_path %>
+            </li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-user"></i> <i class="fa fa-caret-down"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li>
+              <%= link_to(current_user) do %>
+                <i class="fa fa-user"></i> My Profile
+              <% end %>
+            </li>
+            <li>
+              <%= link_to(root_path) do %>
+                <i class="fa fa-envelope"></i> My Messages
+              <% end %>
+            </li>
+            <li>
+              <%= link_to(root_path) do %>
+                <i class="fa fa-bell"></i> My Alerts
+              <% end %>
+            </li>
+            <li>
+              <%= link_to(root_path) do %>
+                <i class="fa fa-calendar"></i> My Calendar
+              <% end %>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <%= link_to(edit_user_registration_path) do %>
+                <i class="fa fa-gear"></i> Settings
+              <% end %>
+            </li>
+            <li>
+              <%= link_to(destroy_user_session_path, :method => :delete) do %>
+                <i class="fa fa-sign-out"></i> Logout
+                <strong><%= current_user.first_name %></strong>
+              <% end %>
+            </li>
+          </ul>
+        </li>
+      </ul> 
+    </div>
+  </nav>
+
+  <%= render 'layouts/side_navigation' %>
+</div>
+
+<% end %>
 

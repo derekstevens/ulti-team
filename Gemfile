@@ -29,6 +29,7 @@ gem 'rubocop-checkstyle_formatter', :require => false
 gem 'bootstrap-sass'
 gem 'wow-rails'
 gem 'animate-rails'
+gem 'font-awesome-rails'
 
 group :development, :test do
 	gem 'spring-commands-rspec'

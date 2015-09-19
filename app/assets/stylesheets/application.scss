@@ -17,8 +17,52 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "animate";
-@import "navbar.scss";
+@import "font-awesome";
+@import "landingnavbar.scss";
 @import "landingpage.scss";
+@import "dashboardnav.scss";
+@import "sidebarnav.scss";
+
+@import "dashboards.scss";
+
+body {
+	font-family: Merriweather, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.wrapper {
+	width: 100%;
+}
+
+#page-wrapper {
+	padding: 0 15px;
+	border: none;
+	background-color: #ecf0f1;
+}
+
+@media(min-width:768px) {
+	#page-wrapper {
+		margin: 50px 0 0 225px;
+		padding: 0 30px;
+		min-height: 1300px;
+		border-left: 1px solid #2c3e50;
+	}
+
+	#page-wrapper.collapsed {
+		margin: 50px 0 0;
+	}
+
+	.page-content {
+		opacity: 0.3;
+		-webkit-transition: opacity .4s linear;
+		-moz-transition: opacity .4s linear;
+		-o-transition: opacity .4s linear;
+		transition: opacity .4s linear;
+	}
+
+	.page-content-ease-in {
+		opacity: 1;
+	}
+}
 
 
 
