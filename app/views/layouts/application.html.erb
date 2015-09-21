@@ -10,7 +10,6 @@
 <%= render 'layouts/navigation' %>
 
 <% if !user_signed_in? %>
-	<%= yield %>
 	<p class="notice"><%= notice %></p>
 	<p class="alert"><%= alert %></p>
 	<%= yield %>
