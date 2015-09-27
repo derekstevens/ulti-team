@@ -1,10 +1,200 @@
-<h1><%= @team.name %></h1>
+<div class="row">
+	<div class="col-md-3 col-sm-5">
+		<div class="profile-avatar">
+			<%= image_tag("bruises.png", size: "250", class: "profile-avatar-img img-responsive thumbnail") %>
+		</div>
 
-<% if user_signed_in? && current_user.is_captain?(@team) %>
-	<p><%= link_to 'Edit team', edit_team_path %></p>
-	<p><%= link_to 'New roster', new_team_team_roster_path(@team) %></p>
-	
-	<% if current_user.id == @team.team_admin_id %>
-  <p><%= link_to 'Update Team Admin', edit_team_admin_path %></p>
-<% end %>
-<% end %>
+		<div class="list-group">
+			<a href="#schedule" class="list-group-item">
+				<i class="fa fa-asterisk text-primary"></i> &nbsp;&nbsp;Schedule
+
+				<i class="fa fa-chevron-right list-group-chevron"></i>
+			</a>
+
+			<a href="#roster" class="list-group-item">
+				<i class="fa fa-users text-primary"></i> &nbsp;&nbsp;Roster
+
+				<i class="fa fa-chevron-right list-group-chevron"></i>
+			</a>
+
+			<a href="#stats" class="list-group-item">
+				<i class="fa fa-book text-primary"></i> &nbsp;&nbsp;Stats
+
+				<i class="fa fa-chevron-right list-group-chevron"></i>
+			</a>
+
+			<% if user_signed_in? && current_user.is_captain?(@team) %>
+			<%= link_to(edit_team_path(@team), class: "list-group-item") do %>
+				<i class="fa fa-gear text-primary"></i> &nbsp;&nbsp;Settings
+
+				<i class="fa fa-chevron-right list-group-chevron"></i>
+			<% end %>
+			<% end %>
+		</div>
+	</div>
+
+	<div class="col-md-6 col-sm-7">
+		<h3><%= @team.name %></h3>
+		<h5 class="text-muted"><%= @team.location %></h5>
+		<hr>
+
+		<p><%= link_to 'Send Message', root_path, class: "btn btn-primary" %></p>
+		<hr>
+
+		<div class="heading-block">
+			<h4>Schedule</h4>
+		</div>
+
+		<div id="schedule">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+					<div class="portlet portlet-default">
+						<div class="portlet-heading">
+							<div class="portlet-title">
+								<h6>Upcoming Games</h6>
+							</div>
+							<div class="portlet-widgets">
+								<% if current_user.is_captain?(@team) %>
+									<%= link_to 'Create Game', new_team_game_path(@team), class: "badge" %>
+								<% end %>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="portlet-body">
+							<% if @team.games.upcoming_games.count > 0 %>
+							<div class="table-responsive">
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>Date</th>
+											<th>Opponent</th>
+											<th>Location</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% @team.games.upcoming_games.each do |game| %>
+										  <tr>
+												<td><%= game.game_date.strftime("%^a, %^b %d") %></td>
+												<td><%= game.opponent_name %></td>
+												<td><%= game.location %></td>
+												
+												<td>
+													<%= link_to 'View Details', team_game_path(@team, game) %>
+													<% if current_user.is_captain?(@team) %>
+													| <%= link_to 'Edit', edit_team_game_path(@team, game) %>
+													<% end %>
+												</td>
+												
+											</tr>
+										<% end %>
+									<tbody>
+								</table>
+							</div>
+							<% else %>
+							
+								<p class="alert alert-info">
+									No upcoming games. 
+									<% if current_user.is_captain?(@team) %>
+										<%= link_to 'Schedule one now!', new_team_game_path(@team), class: 'alert-link' %>
+									<% end %>
+								</p>
+							
+							<% end %>
+						</div>
+
+						<div class="portlet-footer">
+							<%= link_to "See All Games", team_games_path(@team) %>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="heading-block">
+			<h4>Roster</h4>
+		</div>
+
+		<div id="roster">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+					<div class="portlet portlet-default">
+						<div class="portlet-heading">
+							<div class="portlet-title">
+								<h6><%= @current_roster.name %></h6>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+
+						<div class="portlet-body">
+							<div class="table-responsive">
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>Name</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% @current_roster.rosters.includes(:user).each do |player| %>
+										  <tr>
+												<td>
+													<%= link_to player.user.full_name, user_path(player.user.id) %>
+													<% if player.captain? %> * <% end %>
+												</td>
+											</tr>
+										<% end %>
+									<tbody>
+								</table>
+							</div>
+						</div>
+
+						<div class="portlet-footer">
+							<%= link_to "See All Rosters", team_team_rosters_path(@team) %> 
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-3">
+		<div class="heading-block">
+			<h5>Stats</h5>
+		</div>
+
+		<table class="table keyvalue-table">
+			<tbody>
+				<tr>
+					<td class="kv-key"><i class="fa fa-calendar kv-icon kv-icon-primary"></i> Games Played</td>
+					<td class="kv-value">3 </td>
+				</tr>
+				<tr>
+					<td class="kv-key"><i class="fa fa-trophy kv-icon kv-icon-secondary"></i> Overall Record</td>
+					<td class="kv-value">2 - 1 </td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="heading-block">
+			<h5>Activity</h5>
+		</div>
+
+		<div class="well">
+
+			<ul class="icons-list text-md">
+				<li>
+					<i class="icon-li fa fa-location-arrow"></i>
+					<span class="first-name"><%= @team.name %></span> won a game
+					<br>
+					<small>about 4 hours ago</small>
+				</li>
+				<li>
+					<i class="icon-li fa fa-plus"></i>
+					<span class="first-name"><%= @team.name %></span> created a new roster
+					<br>
+					<small>1 day ago</small>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

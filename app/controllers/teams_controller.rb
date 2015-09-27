@@ -4,6 +4,7 @@ class TeamsController < ApplicationController
 	
 	def show
 		@team = Team.find params[:team_id]
+		@current_roster = @team.team_rosters.where("current = ?", true).first
 	end
 
 	def dashboard
