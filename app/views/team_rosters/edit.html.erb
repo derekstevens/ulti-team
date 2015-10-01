@@ -1,12 +1,26 @@
-<h1>Edit Roster</h1>
+<div class="account-wrapper">
+  <div class="account-body">
+    <h3>Edit Roster</h3>
 
-<%= form_for([@team, @team_roster]) do |f| %>
-	<div><%= f.label :name %><br />
-	<%= f.text_field :name, autofocus: true %></div>
+    <%= form_for([@team, @team_roster], class: "form account-form") do |f| %>
 
-	<div><%= f.check_box :current %> <%= f.label :current %>
-		<p>If checked, this will be listed as your current roster. Only players listed on this roster will be considered on the team.</p>
-	</div>
+      <div class="form-group">
+        <%= f.label :name %><br>
+				<%= f.text_field :name, class: "form-control" %>
+      </div>
 
-	<div><%= f.submit "Update" %></div>
-<% end %>
+      <div class="form-group">
+		  	<%= f.check_box :current %> <%= f.label :current, class: "checkbox-inline" %>
+		  	<small>If checked, this will be listed as your current roster. Only players listed on this roster will be considered on the team.</small>
+		  </div>
+
+      <div class="form-group">
+        <%= f.submit "Update Roster", class: "btn btn-secondary btn-block btn-lg" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="account-footer">
+    <%= link_to "Cancel", :back, class: "pull-right btn btn-danger btn-sm" %>
+  </div>
+</div>

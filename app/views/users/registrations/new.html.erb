@@ -1,18 +1,42 @@
-<h2>Sign up</h2>
+<div class="account-wrapper">
+	<div class="account-body">
+		<h3>Get Started with a Free Account</h3>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+		<%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "form account-form") do |f| %>
+		  <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
+		  <div class="form-group">
+		  	<%= f.label :email %><br />
+		  	<%= f.email_field :email, autofocus: true, class: "form-control" %>
+		  </div>
 
-  <div><%= f.label :password %> <% if @validatable %><i>(<%= @minimum_password_length %> characters minimum)</i><% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
+		  <div class="form-group">
+		  	<%= f.label :password %> <% if @validatable %><i>(<%= @minimum_password_length %> characters minimum)</i><% end %><br />
+		    <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+		  </div>
 
-  <div><%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+		  <div class="form-group">
+		  	<%= f.label :password_confirmation %><br />
+		    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+		  </div>
 
-  <div><%= f.submit "Sign up" %></div>
-<% end %>
+		  <div class="form-group">
+		  	<label class="checkbox-inline">
+		  		<input type="checkbox" class="" value=""> I agree to the Terms of Service &amp; Privacy Policy
+		  	</label>
+		  </div>
 
-<%= render "users/shared/links" %>
+		  <div class="form-group">
+		  	<%= f.submit "Create Account", class: "btn btn-secondary btn-block btn-lg" %>
+		  </div>
+		<% end %>
+	</div>
+
+	<div class="account-footer">
+		<p>Already have an account? <%= render "users/shared/links" %></p>
+	</div>
+</div>
+
+
+
+

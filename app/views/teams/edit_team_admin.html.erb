@@ -1,20 +1,37 @@
-<h1>Edit Team Admin</h1>
+<div class="account-wrapper">
+  <div class="account-body">
+    <h3>Transfer Team Admin</h3>
 
-<% if @captains.empty? %>
-	<div>You are the only captain. Please add another captain before attempting to transfer team ownership.</div>
-<% else %>
-	<%= form_for @team, :url => {:action => 'update_team_admin'} do |f| %>
-		<% if @team.errors.any? %>
-			<% @team.errors.full_messages.each do |msg| %>
-				<p><%= msg %></p>
-			<% end %>
-		<% end %>
-		<div><%= f.label :team_admin_id, "Select New Admin" %></div>
-		<% @captains.includes(:user).each do |captain| %>
-			<div><%= radio_button_tag 'team_admin_id', captain.user_id %>
-			<%= f.label captain.user.full_name %></div>
-		<% end %>
+    <% if @captains.empty? %>
+    	<div class="alert">You are the only captain. Please add another captain before attempting to transfer team ownership.</div>
+    <% else %>
 
-		<div><%= f.submit "Update" %></div>
-	<% end %>
-<% end %>
+	    <%= form_for @team, :url => { :action => 'update_team_admin' }, class: "form account-form" do |f| %>
+	    	<% if @team.errors.any? %>
+	    		<div class="errors">
+	    			<% @team.errors.full_messages.each do |msg| %>
+	    				<p><%= msg %></p>
+	    			<% end %>
+	    		</div>
+	    	<% end %>
+
+	      <div class="form-group">
+	        <%= f.label :team_admin_id, "Select New Admin" %>
+					<% @captains.includes(:user).each do |captain| %>
+						<%= radio_button_tag 'team_admin_id', captain.user_id %>
+						<%= f.label captain.user.full_name %>
+					<% end %>
+	      </div>
+
+	      <div class="form-group">
+	        <%= f.submit "Update", class: "btn btn-secondary btn-block btn-lg" %>
+	      </div>
+	    <% end %>
+    <% end %>
+  </div>
+
+  <div class="account-footer">
+    <%= link_to "Cancel", :back, class: "pull-right btn btn-danger btn-sm" %>
+  </div>
+</div>
+

@@ -1,11 +1,26 @@
-<h1>New practice</h1>
+<div class="account-wrapper">
+  <div class="account-body">
+    <h3>New Practice</h3>
 
-<%= form_for ([@team, @practice]) do |f| %>
-	<div><%= f.label :practice_date %><br />
-	<%= f.date_select :practice_date %></div>
+    <%= form_for([@team, @practice], class: "form account-form") do |f| %>
 
-	<div><%= f.label :location %><br />
-	<%= f.text_field :location %></div>
+      <div class="form-group">
+        <%= f.label :practice_date %><br>
+				<%= f.date_select :practice_date, class: "form-control" %>
+      </div>
 
-	<div><%= f.submit "Create practice" %></div>
-<% end %>
+      <div class="form-group">
+        <%= f.label :location %><br />
+				<%= f.text_field :location, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit "Create Practice", class: "btn btn-secondary btn-block btn-lg" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="account-footer">
+    <%= link_to "Cancel", :back, class: "pull-right btn btn-danger btn-sm" %>
+  </div>
+</div>

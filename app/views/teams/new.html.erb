@@ -1,11 +1,26 @@
-<h1>New team</h1>
+<div class="account-wrapper">
+  <div class="account-body">
+    <h3>New Team</h3>
 
-<%= form_for @team do |f| %>
-	<div><%= f.label :name %><br />
-	<%= f.text_field :name %></div>
+    <%= form_for @team, class: "form account-form" do |f| %>
 
-	<div><%= f.label :location %><br />
-	<%= f.text_field :location %></div>
+      <div class="form-group">
+        <%= f.label :name %><br>
+				<%= f.text_field :name, class: "form-control" %>
+      </div>
 
-	<div><%= f.submit "Create team" %></div>
-<% end %>
+      <div class="form-group">
+		  	<%= f.label :location %>
+				<%= f.text_field :location, class: "form-control" %>
+		  </div>
+
+      <div class="form-group">
+        <%= f.submit "Create Team", class: "btn btn-secondary btn-block btn-lg" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="account-footer">
+    <%= link_to "Cancel", :back, class: "pull-right btn btn-danger btn-sm" %>
+  </div>
+</div>

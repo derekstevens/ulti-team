@@ -1,22 +1,42 @@
-<h1>Edit game</h1>
+<div class="account-wrapper">
+  <div class="account-body">
+    <h3>Edit Game</h3>
 
-<%= form_for ([@team, @game]) do |f| %>
-	<div><%= f.label :game_date %><br />
-	<%= f.date_select :game_date %></div>
+    <%= form_for([@team, @game], class: "form account-form") do |f| %>
 
-	<div><%= f.label :opponent_name %><br />
-	<%= f.text_field :opponent_name %></div>
+      <div class="form-group">
+        <%= f.label :game_date %><br>
+				<%= f.date_select :game_date, class: "form-control" %>
+      </div>
 
-	<div><%= f.label :location %><br />
-	<%= f.text_field :location %></div>
+      <div class="form-group">
+        <%= f.label :opponent_name %>
+				<%= f.text_field :opponent_name , class: "form-control" %>
+      </div>
 
-	<div>
-		<h4>Score</h4>
-		<%= f.label :team_score %> <%= f.number_field :team_score %><br>
-		<%= f.label :opponent_score %> <%= f.number_field :opponent_score %>
-	</div>
+      <div class="form-group">
+        <%= f.label :location %><br />
+				<%= f.text_field :location, class: "form-control" %>
+      </div>
 
-	<div><%= f.submit "Update game" %></div>
-<% end %>
+      <% if @game.game_date < Time.now %>
+      <div class="form-group">
+        <h5>Score</h5>
+				<%= f.label :team_score %> <%= f.number_field :team_score %><br>
+				<%= f.label :opponent_score %> <%= f.number_field :opponent_score %>
+			</div>
+			<% end %>
 
-<%= link_to "Delete", [@team, @game], method: :delete, data: { confirm: "You sure?" } %>
+      <div class="form-group">
+        <%= f.submit "Update Game", class: "btn btn-secondary btn-block btn-lg" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="account-footer">
+    <%= link_to "Delete", [@team, @game], method: :delete, data: { confirm: "You sure?" }, class: "pull-left btn btn-primary btn-sm" %>
+
+    <%= link_to "Cancel", :back, class: "pull-right btn btn-danger btn-sm" %>
+  </div>
+</div>
+

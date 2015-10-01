@@ -1,41 +1,66 @@
-<h2>Edit Profile for <%= resource_name.to_s.humanize %></h2>
+<div class="account-wrapper">
+  <div class="account-body">
+    <h3>Edit Profile</h3>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, class: "form account-form") do |f| %>
+      <%= devise_error_messages! %>
 
-  <div><%= f.label :first_name %><br />
-  <%= f.text_field :first_name, autofocus: true %></div>
+      <div class="form-group">
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
+      </div>
 
-  <div><%= f.label :last_name %><br />
-  <%= f.text_field :last_name %></div>
+      <div class="form-group">
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, class: "form-control" %>
+      </div>
 
-  <div><%= f.radio_button :is_female, true %> <%= f.label :is_female, "Female" %>
-       <%= f.radio_button :is_female, false %> <%= f.label :is_female, "Male" %></div>
+      <div class="form-group">
+        <%= f.radio_button :is_female, true %> <%= f.label :is_female, "Female" %>
+        <%= f.radio_button :is_female, false %> <%= f.label :is_female, "Male" %>
+      </div>
 
-  <div><%= f.label :date_of_birth %><br />
-  <%= f.date_select :date_of_birth %></div>
+      <div class="form-group">
+        <%= f.label :date_of_birth %>
+        <%= f.date_select :date_of_birth, class: "form-control" %>
+      </div>
 
-  <div><%= f.label :location %><br />
-  <%= f.text_field :location %></div>
+      <div class="form-group">
+        <%= f.label :location %>
+        <%= f.text_field :location, class: "form-control" %>
+      </div>
 
-  <div><%= f.label :position %><br />
-  <%= f.text_field :position %></div>
+      <div class="form-group">
+        <%= f.label :position %>
+        <%= f.text_field :position, class: "form-control" %>
+      </div>
 
-  <div><%= f.label :years_playing %><br />
-  <%= f.number_field :years_playing %></div>
+      <div class="form-group">
+        <%= f.label :years_playing %>
+        <%= f.number_field :years_playing, class: "form-control" %>
+      </div>
 
-  <div><%= f.label :bio, "About you" %><br />
-  <%= f.text_area :bio %></div>
+      <div class="form-group">
+        <%= f.label :bio, "About you" %>
+        <%= f.text_area :bio, class: "form-control" %>
+      </div>
 
-  
+      <div class="form-group">
+        <%= f.submit "Update", class: "btn btn-secondary btn-block btn-lg" %>
+      </div>
+    <% end %>
+  </div>
 
-  <div><%= f.submit "Update" %></div>
-<% end %>
+  <div class="account-footer">
+    <% if current_user.sign_in_count > 1 %>
+      <h3>Cancel my account</h3>
 
-<% if current_user.sign_in_count > 1 %>
-<h3>Cancel my account</h3>
+      <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-md" %></p>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+      <%= link_to "Back", :back %>
+    <% end %>
+  </div>
+</div>
 
-<%= link_to "Back", :back %>
-<% end %>
+
+
