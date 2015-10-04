@@ -7,7 +7,7 @@ feature "Profile creation" do
 		fill_in "Email", :with => "test@dgs.com"
 		fill_in "Password", :with => "fooman123"
 		fill_in "Password confirmation", :with => "fooman123"
-		click_button "Sign up"
+		click_button "Create Account"
 
 		expect(page).to have_content("Edit Profile")
 

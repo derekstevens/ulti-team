@@ -36,10 +36,11 @@
 			<%= f.hidden_field :team_id, value: params[:team_id] %>
 
 			<div class="input-group">
+				<%= f.label :email, class: "hidden" %>
 				<%= f.text_field :email, :placeholder => 'Enter email', class: "form-control" %>
 				<span class="input-group-btn">
 					<button type="submit" class=" btn btn-primary">
-						<i class="fa fa-lg fa-plus-circle"></i>
+						<i class="fa fa-lg fa-plus-circle"><span class="hidden">Add player</span></i>
 					</button>
 				</span>
 			</div>

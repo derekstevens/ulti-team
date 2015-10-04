@@ -8,16 +8,16 @@ feature "roster invite" do
     fill_in "Email", :with => "test@dgs.com"
     fill_in "Password", :with => "fooman123"
 
-    click_button "Log in"
+    click_button "Log In"
 
     visit "/teams/new"
 
-    expect(page).to have_content("New team")
+    expect(page).to have_content("New Team")
 
     fill_in "Name", :with => "Bruises"
     fill_in "Location", :with => "Boston, MA"
 
-    click_button "Create team"
+    click_button "Create Team"
     expect(page).to have_content("Bruises")
 
     team = Team.last
@@ -41,16 +41,16 @@ feature "roster invite" do
     fill_in "Email", :with => "test@dgs.com"
     fill_in "Password", :with => "fooman123"
 
-    click_button "Log in"
+    click_button "Log In"
 
     visit "/teams/new"
 
-    expect(page).to have_content("New team")
+    expect(page).to have_content("New Team")
 
     fill_in "Name", :with => "Bruises"
     fill_in "Location", :with => "Boston, MA"
 
-    click_button "Create team"
+    click_button "Create Team"
     expect(page).to have_content("Bruises")
 
     team = Team.last

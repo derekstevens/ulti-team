@@ -15,7 +15,7 @@ RSpec.describe TeamRostersController, :type => :controller do
 	end
 
 	describe 'GET #show' do 
-		it "assigns the requested team_roster to @team_roster" do 
+		it "assigns the requested team_roster to @team_roster" do
 			team_roster = FactoryGirl.create(:team_roster)
 			get :show, id: team_roster, team_id: team_roster.team
 			expect(assigns(:team_roster)).to eq team_roster
