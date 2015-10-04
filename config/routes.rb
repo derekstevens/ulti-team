@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   patch 'teams/:team_id' => 'teams#update'
   put 'teams/:team_id' => 'teams#update'
   post 'teams/:team_id/team_rosters/:id/copy' => 'team_rosters#copy'
+  get 'teams/:team_id/team_rosters/:id/toggle_captain' => 'team_rosters#toggle_captain'
 
   authenticated :user do 
     root to: 'users#dashboard', as: :authenticated_root

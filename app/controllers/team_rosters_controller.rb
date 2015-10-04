@@ -1,5 +1,5 @@
 class TeamRostersController < ApplicationController
-	before_filter :authenticate_captain!, :only => [:new, :create, :edit, :update, :destroy, :copy]
+	before_filter :authenticate_captain!, :only => [:new, :create, :edit, :update, :destroy, :copy, :toggle_captain, :show]
 
 	def index
 		@team = Team.find(params[:team_id])
@@ -73,6 +73,25 @@ class TeamRostersController < ApplicationController
 			end
 			redirect_to edit_team_team_roster_path(@team, @new_team_roster)
 		else
+			render :show
+		end
+	end
+
+	def toggle_captain
+		@roster = Roster.find params[:player]
+		@team = Team.find params[:team_id]
+		@team_roster = TeamRoster.find params[:id]
+
+		if @roster.captain?
+			@roster.captain = false
+		else
+			@roster.captain = true
+		end
+
+		if @roster.save
+			redirect_to team_team_roster_path(@team, @team_roster)
+		else
+			/ TODO Error validation /
 			render :show
 		end
 	end

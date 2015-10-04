@@ -4,14 +4,6 @@ $("#sidebar-toggle").click(function(e) {
 	$("#page-wrapper").toggleClass("collapsed");
 });
 
-$(function() {
-	$('#messageScroll, #alertScroll').slimScroll({
-		height: '200px',
-		alwaysVisible: true,
-		disableFadeOut: true,
-		touchScrollStep: 50
-	});
-});
 
 $(function() {
 	$('.tooltip-sidebar-toggle, .tooltip-sidebar-logout').tooltip({

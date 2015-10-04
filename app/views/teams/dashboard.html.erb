@@ -201,6 +201,10 @@
 				<div class="portlet-title">
 					<h4>Current Roster</h4>
 				</div>
+
+				<div class="portlet-widgets">
+					<%= link_to "View all rosters", team_team_rosters_path(@team), class: "badge" %>
+				</div>
 				<div class="clearfix"></div>
 			</div>
 			<div class="portlet-body">
@@ -221,11 +225,6 @@
 				<div class="portlet-heading">
 					<div class="portlet-title">
 						<h4>Upcoming Practices</h4>
-					</div>
-					<div class="portlet-widgets">
-						<% if current_user.is_captain?(@team) %>
-							<%= link_to 'Create Practice', new_team_practice_path(@team), class: "badge" %>
-						<% end %>
 					</div>
 					<div class="clearfix"></div>
 				</div>
