@@ -36,7 +36,7 @@ class GamesController < ApplicationController
 		@team = Team.find params[:team_id]
 		@game = Game.find params[:id]
 
-		if @game.save game_params
+		if @game.update_attributes game_params
 			redirect_to team_game_path(@team, @game)
 		else
 			render :edit
