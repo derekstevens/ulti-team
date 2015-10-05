@@ -4,7 +4,7 @@ class ScheduleValidator < ActiveModel::EachValidator
 		type = record.class.name.demodulize
 		team.practices.each do |practice|
 			if !(practice.class.name.demodulize == type && practice.id == record.id)
-				if value == practice.practice_date
+				if value == practice.practice_date && record.start_time == practice.start_time
 					record.errors[:attribute] << "Practice already scheduled at this time."
 				end
 			end
@@ -12,7 +12,7 @@ class ScheduleValidator < ActiveModel::EachValidator
 
 		team.games.each do |game|
 			if !(game.class.name.demodulize == type && game.id == record.id)
-				if value == game.game_date
+				if value == game.game_date && record.start_time == game.start_time
 					record.errors[:attribute] << "Game already scheduled at this time."
 				end
 			end

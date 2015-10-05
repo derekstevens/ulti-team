@@ -4,7 +4,8 @@ FactoryGirl.define do
   factory :game do
     association :team
     location { Faker::Address.city }
-    game_date { Time.now }
+    game_date { Date.new(2015,1,01) }
+    start_time { Time.now }
 
     factory :invalid_game do 
     	location nil

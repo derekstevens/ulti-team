@@ -19,11 +19,22 @@ RSpec.describe Game, :type => :model do
   	expect(game).to_not be_valid
   end
 
-  it "is invalid for 1 team to have 2 games with same game date" do 
-  	game1 = FactoryGirl.create(:game, game_date: Time.now.middle_of_day)
+  it "is invalid for 1 team to have 2 games with same game date and time" do
+    date = Date.new(2015,1,01)
+    time = Time.now.middle_of_day 
+  	game1 = FactoryGirl.create(:game, game_date: date, start_time: time)
   	team = game1.team 
 
-  	expect(FactoryGirl.create(:game, game_date: Time.now.middle_of_day, team: team)).to_not be_new_record
+  	expect(FactoryGirl.create(:game, game_date: date, start_time: time, team: team)).to_not be_new_record
+  end
+
+  it "is valid for 1 team to have 2 games with same game date and different times" do
+    date = Date.new(2015,1,01)
+    time = Time.now.middle_of_day  
+    game1 = FactoryGirl.create(:game, game_date: Date.today)
+    team = game1.team
+
+    expect(FactoryGirl.create(:game, game_date: date, start_time: time.advance(hours: 3), team: team)).to be_valid
   end
 
   it "is valid for 2 teams to have 2 games with same game date" do 
