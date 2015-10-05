@@ -6,6 +6,14 @@ hr {
 	border: 1px solid #7f8c8d;
 }
 
+.dashboard-side {
+	position: relative;
+	right: 20px;
+	width: 25%;
+	height: 100%;
+	overflow-y: auto;
+}
+
 .page-title h1 {
 	margin: 0;
 	margin-bottom: 15px;
@@ -19,6 +27,7 @@ hr {
 .dashboard-quick-links {
 	margin: 25px 0;
 	font-size: 18px;
+	text-align: center;
 }
 
 .dashboard-quick-links a {
@@ -125,6 +134,11 @@ hr {
 @media(min-width: 768px) {
 	.porlet {
 		margin-bottom: 30px;
+	}
+
+	.dashboard-side {
+		position: absolute;
+		top: 85px;
 	}
 }
 
