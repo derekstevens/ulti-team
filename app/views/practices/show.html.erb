@@ -1,7 +1,15 @@
-<h1><%= @team.name %> Practice</h1>
+<div class="row">
+	<div class="col-lg-8 col-lg-offset-2">
+		<h1><%= @team.name %> Practice</h1>
 
-<div class="practice">
-	<p><%= @practice.practice_date %></p>
-	<p><%= @practice.location %></p>
-	<div class="map"></div>
+		<div class="row">
+			<div class="col-lg-6">
+				<%= @practice.practice_date.strftime("%^a, %^b %d") %>
+				<%= @practice.start_time.strftime("%I:%M %p") %>
+			</div>
+			<div class="col-lg-6">
+				<%= @practice.location %>
+			</div>
+		</div>
+	</div>
 </div>

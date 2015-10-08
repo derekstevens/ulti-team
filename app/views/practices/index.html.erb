@@ -1,7 +1,68 @@
-<% @practices.each do |practice| %>
-	<div class="practice">
-		<h1><%= practice.practice_date %></h1>
-		<h2><%= practice.location %></h2>
-		<div class="map"></div>
+<div class="row">
+	<% if @practices.upcoming_practices.any? %>
+	<div class="col-lg-8 col-lg-offset-2">
+		<h3>Upcoming Practices</h3>
+
+		<% @practices.upcoming_practices.each do |practice| %>
+			<div class="portlet portlet-default">
+				<div class="portlet-heading">
+					<div class="portlet-title">
+						<%= link_to "View Details", team_practice_path(@team, practice), class: 'btn' %>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="portlet-body">
+					<div class="row">
+						<div class="col-lg-6">
+							<%= practice.practice_date.strftime("%^a, %^b %d") %>
+							<%= practice.start_time.strftime("%I:%M %p") %>
+						</div>
+						<div class="col-lg-6">
+							<%= practice.location %>
+						</div>
+					</div>
+				</div>
+
+				<div class="portlet-footer">
+					<% if user_signed_in? && current_user.is_captain?(@team) %>
+						<%= link_to 'Edit practice', edit_team_practice_path(@team, practice) %>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
 	</div>
-<% end %>
+	<% end %>
+	<% if @practices.past_practices.any? %>
+	<div class="col-lg-8 col-lg-offset-2">
+		<h3>Past practices</h3>
+
+		<% @practices.past_practices.each do |practice| %>
+			<div class="portlet portlet-default">
+				<div class="portlet-heading">
+					<div class="portlet-title">
+						<%= link_to "View Details", team_practice_path(@team, practice), class: 'btn' %>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="portlet-body">
+					<div class="row">
+						<div class="col-lg-6">
+							<%= practice.practice_date.strftime("%^a, %^b %d") %>
+							<%= practice.start_time.strftime("%I:%M %p") %>
+						</div>
+						<div class="col-lg-6">
+							<%= practice.location %>
+						</div>
+					</div>
+				</div>
+
+				<div class="portlet-footer">
+					<% if user_signed_in? && current_user.is_captain?(@team) %>
+						<%= link_to 'Edit practice', edit_team_practice_path(@team, practice) %>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+	<% end %>
+</div>
