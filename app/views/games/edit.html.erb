@@ -33,7 +33,7 @@
 				<%= f.text_field :location, class: "form-control" %>
       </div>
 
-      <% if @game.game_date < Time.now %>
+      <% if @game.game_date < Time.current.to_date %>
       <div class="form-group">
         <h5>Score</h5>
 				<%= f.label :team_score %> <%= f.number_field :team_score %><br>

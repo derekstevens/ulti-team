@@ -1,7 +1,79 @@
-<% @games.each do |game| %>
-	<div class="game">
-		<h1><%= game.game_date %></h1>
-		<h2><%= game.location %></h2>
-		<div class="map"></div>
+<div class="row">
+	<div class="col-lg-8 col-lg-offset-2">
+		<h3>Upcoming Games</h3>
+
+		<% @games.upcoming_games.each do |game| %>
+			<div class="portlet portlet-default">
+				<div class="portlet-heading">
+					<div class="portlet-title">
+						<%= link_to "View Details", team_game_path(@team, game), class: 'btn' %>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="portlet-body">
+					<div class="row">
+						<div class="col-lg-6">
+							<p><%= game.game_date.strftime("%^a, %^b %d") %> vs. <%= game.opponent_name %><p>
+							<%= game.start_time.strftime("%I:%M %p") %>
+						</div>
+						<div class="col-lg-6">
+							<%= game.location %>
+						</div>
+					</div>
+				</div>
+
+				<div class="portlet-footer">
+					<% if user_signed_in? && current_user.is_captain?(@team) %>
+						<%= link_to 'Edit Game', edit_team_game_path(@team, game) %>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
 	</div>
-<% end %>
+
+	<div class="col-lg-8 col-lg-offset-2">
+		<h3>Past Games</h3>
+
+		<% @games.past_games.each do |game| %>
+			<div class="portlet portlet-default">
+				<div class="portlet-heading">
+					<div class="portlet-title">
+						<%= link_to "View Details", team_game_path(@team, game), class: 'btn' %>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="portlet-body">
+					<div class="row">
+						<div class="col-lg-6">
+							<p><%= game.game_date.strftime("%^a, %^b %d") %> vs. <%= game.opponent_name %><p>
+							<%= game.start_time.strftime("%I:%M %p") %>
+						</div>
+						<div class="col-lg-6">
+							<%= game.location %>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4">
+							<% if game.team_score? %>
+								<div class="scores">
+									<%= @team.name %>: <span class="team-score"><%= game.team_score %></span>
+									<%= game.opponent_name %>: <span class="opponent-score"><%= game.opponent_score %>
+								</div>
+							<% else %>
+								<div class="alert alert-info">Please update the score of this game</div>
+							<% end %> 
+						</div>
+					</div>
+				</div>
+
+				<div class="portlet-footer">
+					<% if user_signed_in? && current_user.is_captain?(@team) %>
+						<%= link_to 'Edit Game', edit_team_game_path(@team, game) %>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>
+
+

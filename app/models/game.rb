@@ -7,7 +7,7 @@ class Game < ActiveRecord::Base
 
 	scope :wins, -> { where('team_score > opponent_score') }
 	scope :loses, -> { where('team_score < opponent_score') }
-	scope :upcoming_games, -> { where('game_date > ?', Date.today).order(:game_date) }
-	scope :past_games, -> { where('game_date < ?', Date.today).order(game_date: :desc) }
+	scope :upcoming_games, -> { where('game_date >= ?', Time.current).order(:game_date) }
+	scope :past_games, -> { where('game_date < ?', Time.current).order(game_date: :desc) }
 
 end

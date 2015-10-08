@@ -1,7 +1,29 @@
-<h1><%= @team.name %> vs <%= @game.opponent_name %></h1>
+<div class="row">
+	<div class="col-lg-8 col-lg-offset-2">
+		<h1><%= @team.name %> vs <%= @game.opponent_name %></h1>
 
-<div class="game">
-	<p><%= @game.game_date %></p>
-	<p><%= @game.location %></p>
-	<div class="map"></div>
+		<div class="row">
+			<div class="col-lg-6">
+				<%= @game.game_date.strftime("%^a, %^b %d") %>
+				<%= @game.start_time.strftime("%I:%M %p") %>
+			</div>
+			<div class="col-lg-6">
+				<%= @game.location %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-4">
+				<% if @game.game_date < Time.current.to_date %>
+					<% if @game.team_score? %>
+						<div class="scores">
+							<%= @team.name %>: <span class="team-score"><%= @game.team_score %></span>
+							<%= @game.opponent_name %>: <span class="opponent-score"><%= @game.opponent_score %>
+						</div>
+					<% else %>
+						<div class="alert alert-info">Please update the score of this game</div>
+					<% end %>
+				<% end %> 
+			</div>
+		</div>
+	</div>
 </div>
