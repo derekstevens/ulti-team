@@ -1,13 +1,34 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations" }
   resources :users, :only => [:show]
-  resources :teams
+  resources :teams, :except => [:show, :edit, :update, :destroy] do 
+    resources :team_rosters
+    resources :games
+    resources :practices
+  end
+  resources :rosters, :only => [:destroy]
+  resources :roster_invites
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+  get 'teams/:team_id/dashboard' => 'teams#dashboard', as: :team_dashboard
   get 'dashboard' => 'users#dashboard'
   # You can have the root of your site routed with "root"
-  root 'static_pages#index'
+  get 'teams/:team_id' => 'teams#show', as: :team
+  get 'teams/:team_id/edit' => 'teams#edit', as: :edit_team
+  get 'teams/:team_id/update_team_admin' => 'teams#edit_team_admin', as: :edit_team_admin
+  delete 'teams/:team_id' => 'teams#destroy'
+  patch 'teams/:team_id/update_team_admin' => 'teams#update_team_admin'
+  patch 'teams/:team_id' => 'teams#update'
+  put 'teams/:team_id' => 'teams#update'
+  post 'teams/:team_id/team_rosters/:id/copy' => 'team_rosters#copy'
+  get 'teams/:team_id/team_rosters/:id/toggle_captain' => 'team_rosters#toggle_captain'
 
+  authenticated :user do 
+    root to: 'users#dashboard', as: :authenticated_root
+  end
+  root 'static_pages#index'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

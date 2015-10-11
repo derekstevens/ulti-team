@@ -1,0 +1,71 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_self
+ */
+
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "animate";
+@import "font-awesome";
+@import "landingnavbar.scss";
+@import "landingpage.scss";
+@import "dashboardnav.scss";
+@import "sidebarnav.scss";
+
+@import "dashboards.scss";
+@import "profile.scss";
+@import "forms.scss";
+
+body {
+	font-family: Merriweather, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.wrapper {
+	width: 100%;
+	background-color: #34495e;
+}
+
+#page-wrapper {
+	padding: 0 15px;
+	border: none;
+	background-color: #ecf0f1;
+}
+
+@media(min-width:768px) {
+	#page-wrapper {
+		margin: 50px 0 0 225px;
+		padding: 0 30px;
+		min-height: 1300px;
+		border-left: 1px solid #2c3e50;
+	}
+
+	#page-wrapper.collapsed {
+		margin: 50px 0 0;
+	}
+
+	.page-content {
+		opacity: 0.3;
+		-webkit-transition: opacity .4s linear;
+		-moz-transition: opacity .4s linear;
+		-o-transition: opacity .4s linear;
+		transition: opacity .4s linear;
+	}
+
+	.page-content-ease-in {
+		opacity: 1;
+	}
+}
+
+
+

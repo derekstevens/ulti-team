@@ -1,0 +1,222 @@
+.landing-page {
+    br.xs-30,
+    br.sm-0 {
+        content: "";
+        width: 100%;
+        height: 0;
+        padding: 0;
+        margin: 0;
+    }
+
+    br.xs-30 {
+        height: 30px;
+        line-height: 30px;
+        display: inline-block;
+    }
+
+    .btn-transparent {
+        color: #ffffff;
+        background-color: transparent;
+        border-color: #ffffff;
+        border-width: 2px;
+    }
+
+    .field-at-dusk {
+        width: 100%;
+        height: 775px;
+        background-image: url(/assets/grass-field-at-dusk.jpg);
+        background-position: center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        -o-background-size: cover;
+    }
+
+    .field-at-dusk .container {
+        margin-top: 50px;
+    }
+
+    .carousel-fade .carousel-inner .item {
+        opacity: 0;
+        transition-property: opacity;
+    }
+
+    .carousel-fade .carousel-inner .active {
+        opacity: 1;
+    }
+
+    .carousel-fade .carousel-inner .active.left,
+    .carousel-fade .carousel-inner .active.right {
+        left: 0;
+        opacity: 0;
+        z-index: 1;
+    }
+
+    .carousel-fade .carousel-inner .next.left,
+    .carousel-fade .carousel-inner .prev.right {
+        opacity: 1;
+    }
+
+    .carousel-fade .carousel-control {
+        z-index: 2;
+    }
+
+    .container {
+        position: relative;
+    }
+
+    .masthead {
+        width: 100%;
+        padding-top: 0;
+        padding-bottom: 0;
+        background-color: #314657;
+        border-bottom: 1px solid #ddd;
+    }
+
+    h4.masthead-title {
+        font-family: 'Open Sans', 'Trebuchet MS', arial, sans-serif;
+        font-weight: 600;
+        letter-spacing: -1px;
+        font-size: 38px;
+    }
+
+    .masthead-text {
+        padding-top: 15px;
+        color: #ffffff;
+        font-size: 15px;
+    }
+
+    .masthead-actions .btn {
+        margin-right: .75em;
+    }
+
+    .masthead-actions .btn:last-child {
+        margin-right: 0;
+    }
+
+    .masthead-carousel .carousel-controls {
+        position: absolute;
+        bottom: 25px;
+    }
+
+    .masthead-carousel .carousel-control {
+        position: static;
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+    }
+
+    .masthead-carousel .carousel-control.left,
+    .masthead-carousel .carousel-control.right {
+        background: rgba(0,0,0,0.32);
+        -webkit-filter: none;
+        filter: none;
+        border-radius: 3px;
+    }
+
+    .content {
+        padding: 0 40px;
+        margin-bottom: 0;
+    }
+
+    .home-section,
+    .content-feature {
+        position: relative;
+        padding-top: 45px;
+        padding-bottom: 45px;
+        margin: 0;
+        border-top: 1px solid #ddd;
+    }
+
+    .home-section:first-child,
+    .content-feature:first-child {
+        padding-top: 35px;
+        margin-top: -40px;
+        border-top: none;
+    }
+
+    .home-section:last-child,
+    .content-feature:last-child {
+        margin-bottom: -40px;
+    }
+
+    .feature-lg .feature-figure {
+        padding-right: 0;
+    }
+
+    .feature-lg .feature-content {
+        padding-top: 0;
+    }
+
+    .figure-shadow {
+        padding: 1px;
+        border: 1px solid #eee;
+        box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+    }
+
+    .heading-block {
+        position: relative;
+        margin-bottom: 30px;
+        text-align: left;
+    }
+
+    .heading-block.heading-center {
+        text-align: center;
+    }
+
+    .heading-block:before {
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        z-index: 9;
+        background: #e6e6e6;
+    }
+
+    .heading-block:after {
+        content: "";
+        display: block;
+        position: relative;
+        z-index: 10;
+        width: 80%;
+        height: 1px;
+        margin: 20px 0 0;
+        background: #6685a4;
+    }
+
+    .heading-block.heading-minimal {
+        margin-bottom: 60px;
+    }
+
+    .heading-block.heading-minimal:before,
+    .heading-block.heading-minimal:after {
+        height: 2px;
+    }
+
+    .heading-block.heading-minimal:before {
+        display: none;
+    }
+
+    .heading-block.heading-minimal:after {
+        margin-top: 40px;
+    }
+
+    .heading-block.heading-center:after {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .footer {
+        padding: 35px 0 0;
+        color: #ffffff;
+        background: #314657;
+    }
+
+    .footer a {
+        color: #93acc2;
+    }
+}
+
+

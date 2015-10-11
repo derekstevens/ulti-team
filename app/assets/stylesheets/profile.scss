@@ -1,0 +1,139 @@
+.text-primary {
+	color: #d74b4b;
+}
+
+.text-md {
+	font-size: 13px;
+}
+
+a.text-primary:hover,
+a.text-primary:focus {
+	color: #c42b2b;
+}
+
+
+.list-group .list-group-item {
+	max-width: 450px;
+}
+
+.list-group .list-group-item .list-group-chevron {
+	float: right;
+	margin-top: 5px;
+	color: #bbb;
+}
+
+.icons-list {
+	padding: 0;
+	margin-bottom: 25px;
+	list-style: none;
+}
+
+.icons-list > li {
+	position: relative;
+	padding-left: 1.75em;
+	margin-bottom: 1em;
+	line-height: 1.65em;
+}
+
+.icons-list > li > .icon-li {
+	position: absolute;
+	top: .25em;
+	left: 0;
+	width: 1em;
+	font-size: 1.25em;
+	text-align: center;
+}
+
+.tile {
+	margin-bottom: 15px;
+	padding: 15px;
+	overflow: hidden;
+	color: #fff;
+}
+
+.dark-blue {
+	background-color: #34495e;
+}
+
+.heading-block {
+	position: relative;
+	margin-bottom: 20px;
+	text-align: left;
+}
+
+.heading-block h1,
+.heading-block h2,
+.heading-block h3,
+.heading-block h4,
+.heading-block h5,
+.heading-block h6 {
+	margin-bottom: 0;
+	color: #354b5e;
+}
+
+.heading-block::before {
+	content: "";
+	display: block;
+	position: absolute;
+	bottom: 0;
+	z-index: 9;
+	width: 100%;
+	height: 1px;
+	background: #e6e6e6;
+}
+
+.heading-block::after {
+	content: "";
+	display: block;
+	position: relative;
+	z-index: 10;
+	width: 80px;
+	height: 1px;
+	margin: 20px 0 0;
+	background: #6685a4;
+}
+
+.keyvalue-table > tbody > tr > td {
+	vertical-align: middle;
+	padding-top: 11px;
+	padding-bottom: 11px;
+	border-top: none;
+	border-bottom: 1px solid #ddd;
+}
+
+.kv-key {
+	color: #555;
+	font-size: 12px;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.kv-icon {
+	position: relative;
+	top: 1px;
+	width: 30px;
+	height: 30px;
+	margin-right: .75em;
+	color: #444;
+	font-size: 15px;
+	text-align: center;
+	line-height: 30px;
+	background-color: #eee;
+	border-radius: 4px;
+}
+
+.kv-icon-primary {
+	background-color: #d74b4b;
+	color: #fff;
+}
+
+.kv-icon-secondary {
+	background-color: #6685a4;
+	color: #fff;
+}
+
+.kv-value {
+	font-size: 18px;
+	font-weight: 600;
+	text-align: right;
+}

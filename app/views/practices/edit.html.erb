@@ -1,0 +1,38 @@
+<div class="account-wrapper">
+  <div class="account-body">
+    <h3>Edit Practice</h3>
+
+    <%= form_for([@team, @practice], class: "form account-form") do |f| %>
+
+      <div class="form-group">
+        <%= f.label :practice_date %><br>
+				<%= f.date_field :practice_date, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :start_time %>
+        <%= f.time_field :start_time, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :end_time %>
+        <%= f.time_field :end_time, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :location %><br />
+				<%= f.text_field :location, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit "Update Practice", class: "btn btn-secondary btn-block btn-lg" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="account-footer">
+    <%= link_to "Delete", [@team, @practice], method: :delete, data: { confirm: "You sure?" }, class: "pull-left btn btn-primary btn-sm" %>
+
+    <%= link_to "Cancel", :back, class: "pull-right btn btn-danger btn-sm" %>
+  </div>
+</div>

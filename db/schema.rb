@@ -11,17 +11,71 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141213183316) do
+ActiveRecord::Schema.define(version: 20151005004144) do
 
-  create_table "teams", force: true do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "games", force: :cascade do |t|
+    t.integer  "team_id"
+    t.string   "location"
+    t.date     "game_date"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "opponent_name"
+    t.integer  "team_score"
+    t.integer  "opponent_score"
+    t.time     "start_time"
+    t.time     "end_time"
+  end
+
+  create_table "practices", force: :cascade do |t|
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "location"
+    t.date     "practice_date"
+    t.integer  "team_id"
+    t.time     "start_time"
+    t.time     "end_time"
+  end
+
+  create_table "roster_invites", force: :cascade do |t|
+    t.string   "email"
+    t.integer  "team_roster_id"
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.string   "token"
+    t.boolean  "captain"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "rosters", force: :cascade do |t|
+    t.boolean  "captain"
+    t.integer  "team_roster_id"
+    t.integer  "user_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "team_rosters", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "current"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.string   "name"
     t.string   "location"
     t.string   "league"
+    t.integer  "team_admin_id"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
@@ -44,7 +98,7 @@ ActiveRecord::Schema.define(version: 20141213183316) do
     t.boolean  "is_female",              default: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

@@ -1,0 +1,30 @@
+<div class="account-wrapper">
+  <div class="account-body">
+    <h3>Edit Team</h3>
+
+    <%= form_for @team, class: "form account-form" do |f| %>
+
+      <div class="form-group">
+        <%= f.label :name %><br>
+				<%= f.text_field :name, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+		  	<%= f.label :location %>
+				<%= f.text_field :location, class: "form-control" %>
+		  </div>
+
+      <div class="form-group">
+        <%= f.submit "Update Team", class: "btn btn-secondary btn-block btn-lg" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="account-footer">
+  	<% if current_user.id == @team.team_admin_id %>
+  	<%= link_to 'Delete', team_path, data: { confirm: "Are you sure?" }, method: :delete, class: "pull-left btn btn-primary btn-sm" %>
+  	<% end %>
+    <%= link_to "Cancel", :back, class: "pull-right btn btn-danger btn-sm" %>
+  </div>
+</div>
+
