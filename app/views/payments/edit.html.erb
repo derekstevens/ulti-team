@@ -1,0 +1,40 @@
+<div class="account-wrapper">
+  <div class="account-body">
+    <h3>Edit Payment</h3>
+
+    <%= form_for([@team, @payment], class: "form account-form") do |f| %>
+
+      <div class="form-group">
+        <%= f.label :title %>
+				<%= f.text_field :title, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_field :description, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :due_date %>
+        <%= f.date_field :due_date, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <small>Enter the total amount, it will be split among all players automatically<small>
+        <%= f.label :amount %>
+				<%= f.text_field :amount , class: "form-control" %>
+      </div>
+
+
+      <div class="form-group">
+        <%= f.submit "Update Payment", class: "btn btn-secondary btn-block btn-lg" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="account-footer">
+    <%= link_to "Delete", [@team, @payment], method: :delete, data: { confirm: "You sure?" }, class: "pull-left btn btn-primary btn-sm" %> 
+    
+    <%= link_to "Cancel", :back, class: "pull-right btn btn-danger btn-sm" %>
+  </div>
+</div>

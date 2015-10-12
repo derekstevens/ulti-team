@@ -1,0 +1,28 @@
+<div class="row">
+	<div class="col-lg-8 col-lg-offset-2">
+		<div class="portlet portlet-default">
+			<div class="portlet-heading">
+				<div class="portlet-title">
+					<%= link_to "View Details", team_payment_path(@team, @payment), class: 'btn' %>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="portlet-body">
+				<div class="row">
+					<div class="col-lg-6">
+						<h3><%= @payment.title %></h3>
+						<p><%= @payment.due_date.strftime("%^a, %^b %d") %></p>
+					</div>
+					<div class="col-lg-6">
+						<%= @payment.paid_amount %> out of <%= @payment.amount %>
+						<p><%= @payment.description %></p>
+					</div>
+				</div>
+			</div>
+
+			<div class="portlet-footer">
+				<%= link_to 'Edit Payment', edit_team_payment_path(@team, @payment) %>
+			</div>
+		</div>
+	</div>
+</div>

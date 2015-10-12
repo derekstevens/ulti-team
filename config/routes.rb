@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :team_rosters
     resources :games
     resources :practices
+    resources :payments
   end
   resources :rosters, :only => [:destroy]
   resources :roster_invites
