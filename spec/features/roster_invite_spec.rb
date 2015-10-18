@@ -23,7 +23,7 @@ feature "roster invite" do
     team = Team.last
     team_roster = TeamRoster.last
 
-    visit "/teams/#{team.id}/team_rosters/#{team_roster.id}"
+    visit "/teams/#{team.id}/team_rosters/#{team_roster.id}/manage"
     expect(page).to have_content("Bruises 2015")
 
     test_user = FactoryGirl.create(:user, email: "testderek@dgs.com")
@@ -56,7 +56,7 @@ feature "roster invite" do
     team = Team.last
     team_roster = TeamRoster.last
 
-    visit "/teams/#{team.id}/team_rosters/#{team_roster.id}"
+    visit "/teams/#{team.id}/team_rosters/#{team_roster.id}/manage"
     expect(page).to have_content("Bruises 2015")
 
     test_user1 = FactoryGirl.create(:user, email: "testderek@dgs.com")

@@ -17,7 +17,8 @@ RSpec.describe TeamRostersController, :type => :controller do
 	describe 'GET #show' do 
 		it "assigns the requested team_roster to @team_roster" do
 			team_roster = FactoryGirl.create(:team_roster)
-			get :show, id: team_roster, team_id: team_roster.team
+			params = { id: team_roster, team_id: team_roster.team }
+			get :show, params
 			expect(assigns(:team_roster)).to eq team_roster
 		end
 		it "renders the :show template" do 

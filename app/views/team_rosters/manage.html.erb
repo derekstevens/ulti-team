@@ -1,0 +1,58 @@
+<div class="account-wrapper">
+	<div class="account-body">
+		<h3>Manage <%= @team_roster.name %></h3>
+
+		<% @team_roster.rosters.includes(:user).each do |player| %>
+		<div class="form-group">
+			<%= link_to player.user.full_name, user_path(player.user.id) %> 
+			<% if player.captain? %> 
+				<span class="badge green">Captain</span>
+			<% end %>
+
+			<% if user_signed_in? && current_user.is_captain?(@team) %>
+			<span class="pull-right">
+				<% if !player.captain? %>
+					<%= link_to(action: "toggle_captain", player: player) do %>
+						<i class="fa fa-lg fa-arrow-circle-up" ></i>
+					<% end %>
+				<% else %>
+					<%= link_to(action: "toggle_captain", player: player) do %>
+						<i class="fa fa-lg fa-arrow-circle-down"></i>
+					<%end %>
+				<% end %>
+				<%= link_to player, method: :delete, data: { confirm: "Are you sure?" } do %>
+		    	<i class="fa fa-lg fa-times-circle" ></i>
+		    <% end %>
+			</span>
+			<% end %>
+		</div>
+		<% end %>
+		<hr>
+
+		<h4 class="add-player">Add Player</h4>
+		<small>Enter a single email, or a comma-separated list of emails</small>
+		<%= form_for @roster_invite, :url => roster_invites_path do |f| %>
+			<%= f.hidden_field :team_roster_id, value: params[:id] %>
+			<%= f.hidden_field :team_id, value: params[:team_id] %>
+
+			<div class="input-group">
+				<%= f.label :email, class: "hidden" %>
+				<%= f.text_field :email, :placeholder => 'Enter email', class: "form-control" %>
+				<span class="input-group-btn">
+					<button type="submit" class=" btn btn-primary">
+						<i class="fa fa-lg fa-plus-circle"><span class="hidden">Add player</span></i>
+					</button>
+				</span>
+			</div>
+		<% end %>
+	</div>
+
+	<div class="account-footer">
+		<% if user_signed_in? && current_user.is_captain?(@team) %>
+			<%= button_to "Copy", { action: "copy", team_id: @team.id, id: @team_roster.id }, data: { disable_with: 'Copying...' }, class: "btn btn-primary btn-sm pull-left" %>
+		<% end %>
+
+		<%= link_to 'Back to All Rosters', team_team_rosters_path(@team) , class: "btn btn-danger btn-sm pull-right" %>
+	</div>
+</div>
+

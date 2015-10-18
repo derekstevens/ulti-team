@@ -1,5 +1,5 @@
 class TeamRostersController < ApplicationController
-	before_filter :authenticate_captain!, :only => [:new, :create, :edit, :update, :destroy, :copy, :toggle_captain, :show]
+	before_filter :authenticate_captain!, :only => [:new, :create, :edit, :update, :destroy, :copy, :toggle_captain, :manage]
 
 	def index
 		@team = Team.find(params[:team_id])
@@ -7,6 +7,11 @@ class TeamRostersController < ApplicationController
 	end
 
 	def show
+		@team = Team.find(params[:team_id])
+		@team_roster = TeamRoster.find(params[:id])
+	end
+
+	def manage
 		@team = Team.find(params[:team_id])
 		@team_roster = TeamRoster.find(params[:id])
 		@roster_invite = RosterInvite.new
