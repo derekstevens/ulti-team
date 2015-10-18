@@ -13,8 +13,10 @@ Rails.application.routes.draw do
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+  get 'teams/:team_id/schedule' => 'teams#schedule', as: :team_schedule
   get 'teams/:team_id/dashboard' => 'teams#dashboard', as: :team_dashboard
   get 'dashboard' => 'users#dashboard'
+  get 'schedule' => 'users#schedule', as: :user_schedule
   # You can have the root of your site routed with "root"
   get 'teams/:team_id' => 'teams#show', as: :team
   get 'teams/:team_id/edit' => 'teams#edit', as: :edit_team

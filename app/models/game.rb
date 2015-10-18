@@ -10,4 +10,8 @@ class Game < ActiveRecord::Base
 	scope :upcoming_games, -> { where('game_date >= ?', Time.current).order(:game_date) }
 	scope :past_games, -> { where('game_date < ?', Time.current).order(game_date: :desc) }
 
+	def start_time
+		self.game_date
+	end
+
 end

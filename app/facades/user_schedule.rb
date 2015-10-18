@@ -1,11 +1,21 @@
-class UserDashboard
+class UserSchedule
 	attr_reader :user
 
 	def initialize(user)
 		@user = user
 	end
 
-	def teams
+	def events
+		teams = find_teams
+		events = []
+		teams.each do |team|
+			events = events + team.games
+			events = events + team.practices
+		end
+		events
+	end
+
+	def find_teams
 		current_teams = []
     current_rosters = Roster.where("user_id = ?", @user.id)
     current_rosters.includes(:team_roster).each do |r|
@@ -14,11 +24,5 @@ class UserDashboard
       end
     end
     current_teams
-  end
-
-  def team_events(team)
-    events = Game.where(team_id: team.id)
-    events = events + Practice.where(team_id: team.id)
-  end
-
+	end
 end

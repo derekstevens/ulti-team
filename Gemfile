@@ -30,6 +30,7 @@ gem 'bootstrap-sass'
 gem 'wow-rails'
 gem 'animate-rails'
 gem 'font-awesome-rails'
+gem 'simple_calendar'
 
 group :development, :test do
 	gem 'spring-commands-rspec'

@@ -1,0 +1,31 @@
+<% if user_signed_in? && current_user.is_captain?(@team) %>
+<div class="row">
+	<div class="col-lg-8 col-lg-offset-2">
+		<div class="pull-right">
+	    <%= link_to new_team_game_path(@team), class: "btn btn-default" do %>
+	    	<i class="fa fa-plus"></i> Create Game
+	    <% end %> 
+	    <%= link_to new_team_practice_path(@team), class: "btn btn-default" do %>
+	    	<i class="fa fa-plus"></i> Create Practice
+	    <% end %>
+		</div>
+	</div>
+</div>
+<% end %>
+<div class="row">
+	<div class="col-lg-8 col-lg-offset-2">
+		<%= month_calendar events: @schedule.events do |date, events| %>
+			<%= date.strftime("%d") %>
+
+			<% events.each do |event| %>
+				<div>
+					<% if event.class == Game %>
+						<%= link_to "vs. #{event.opponent_name}", team_game_path(@team, event) %>
+					<% else %>
+						<%= link_to 'Practice', team_practice_path(@team, event) %>
+					<% end %>
+				</div>
+			<% end %>
+		<% end %>
+	</div>
+</div>

@@ -12,6 +12,12 @@ class TeamsController < ApplicationController
 
 		@dashboard = TeamDashboard.new(@team)
 	end
+
+	def schedule
+		@team = Team.find params[:team_id]
+
+		@schedule = TeamSchedule.new(@team)
+	end
 	
 	def new
 		@team = Team.new
