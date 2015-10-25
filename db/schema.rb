@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151012185346) do
+ActiveRecord::Schema.define(version: 20151025235402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20151012185346) do
     t.time     "end_time"
   end
 
+  add_index "games", ["team_id"], name: "index_games_on_team_id", using: :btree
+
   create_table "payments", force: :cascade do |t|
     t.integer  "team_id"
     t.integer  "amount_cents",    default: 0,     null: false
@@ -41,6 +43,8 @@ ActiveRecord::Schema.define(version: 20151012185346) do
     t.datetime "updated_at",                      null: false
   end
 
+  add_index "payments", ["team_id"], name: "index_payments_on_team_id", using: :btree
+
   create_table "practices", force: :cascade do |t|
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
@@ -50,6 +54,8 @@ ActiveRecord::Schema.define(version: 20151012185346) do
     t.time     "start_time"
     t.time     "end_time"
   end
+
+  add_index "practices", ["team_id"], name: "index_practices_on_team_id", using: :btree
 
   create_table "roster_invites", force: :cascade do |t|
     t.string   "email"
@@ -78,6 +84,8 @@ ActiveRecord::Schema.define(version: 20151012185346) do
     t.boolean  "current"
   end
 
+  add_index "team_rosters", ["team_id"], name: "index_team_rosters_on_team_id", using: :btree
+
   create_table "teams", force: :cascade do |t|
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
@@ -85,6 +93,19 @@ ActiveRecord::Schema.define(version: 20151012185346) do
     t.string   "location"
     t.string   "league"
     t.integer  "team_admin_id"
+  end
+
+  add_index "teams", ["name"], name: "index_teams_on_name", using: :btree
+
+  create_table "user_payments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "payment_id"
+    t.integer  "amount_due_cents",     default: 0,     null: false
+    t.string   "amount_due_currency",  default: "USD", null: false
+    t.integer  "amount_paid_cents",    default: 0,     null: false
+    t.string   "amount_paid_currency", default: "USD", null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   create_table "users", force: :cascade do |t|
