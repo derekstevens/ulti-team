@@ -2,7 +2,7 @@
   <div class="account-body">
     <h3>Create Roster</h3>
 
-    <%= form_for([@team, @team_roster], class: "form account-form") do |f| %>
+    <%= form_for([@team, @team_roster], validate: :true, class: "form account-form") do |f| %>
 
       <div class="form-group">
         <%= f.label :name %><br>

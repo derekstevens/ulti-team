@@ -1,6 +1,10 @@
 class Payment < ActiveRecord::Base
 	belongs_to :team
 
+	validates :title, presence: true
+	validates :due_date, presence: true
+	validates :amount, presence: true
+
 	monetize :amount_cents
 
 	scope :paid_entirely, -> {where('paid_in_full = ?', true)}

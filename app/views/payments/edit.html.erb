@@ -2,7 +2,7 @@
   <div class="account-body">
     <h3>Edit Payment</h3>
 
-    <%= form_for([@team, @payment], class: "form account-form") do |f| %>
+    <%= form_for([@team, @payment], validate: :true, class: "form account-form") do |f| %>
 
       <div class="form-group">
         <%= f.label :title %>

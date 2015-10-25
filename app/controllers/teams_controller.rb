@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
 	before_filter :authenticate_user!, :only => [:new, :create]
-	before_filter :authenticate_captain!, :only => [:edit, :update, :destroy, :dashboard]
+	before_filter :authenticate_captain!, :only => [:edit, :update, :destroy, :dashboard, :edit_team_admin]
 	
 	def show
 		@team = Team.find params[:team_id]

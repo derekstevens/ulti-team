@@ -31,6 +31,7 @@ gem 'wow-rails'
 gem 'animate-rails'
 gem 'font-awesome-rails'
 gem 'simple_calendar'
+gem 'client_side_validations', github: 'DavyJonesLocker/client_side_validations'
 
 group :development, :test do
 	gem 'spring-commands-rspec'

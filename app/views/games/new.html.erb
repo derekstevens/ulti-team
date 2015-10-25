@@ -2,7 +2,7 @@
   <div class="account-body">
     <h3>New Game</h3>
 
-    <%= form_for([@team, @game], class: "form account-form") do |f| %>
+    <%= form_for([@team, @game], validate: :true, class: "form account-form") do |f| %>
 
       <div class="form-group">
         <%= f.label :game_date %>

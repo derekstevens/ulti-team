@@ -2,10 +2,10 @@
   <div class="account-body">
     <h3>Edit Team</h3>
 
-    <%= form_for @team, class: "form account-form" do |f| %>
+    <%= form_for @team, validate: :true, class: "form account-form" do |f| %>
 
       <div class="form-group">
-        <%= f.label :name %><br>
+        <%= f.label :name %>
 				<%= f.text_field :name, class: "form-control" %>
       </div>
 
