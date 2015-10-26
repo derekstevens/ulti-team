@@ -66,7 +66,10 @@ class PaymentsController < ApplicationController
 			amount_due = payment.amount / user_count
 
 			current_roster.rosters.each do |user|
-				user_payment = UserPayment.create(user_id: roster.id, payment_id: payment.id, amount: amount_due)
+				user_payment = UserPayment.new(amount_due: amount_due)
+				user_payment.user_id = user.id
+				user_payment.payment_id = payment.id
+				user_payment.save
 			end
 		end
 

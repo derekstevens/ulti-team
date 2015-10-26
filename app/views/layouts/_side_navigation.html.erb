@@ -21,10 +21,14 @@
       		<i class="fa fa-dashboard"></i> My Dashboard
       	<% end %>
       </li>
-
       <li>
         <%= link_to(user_schedule_path) do %>
           <i class="fa fa-calendar"></i> My Schedule
+        <% end %>
+      </li>
+      <li>
+        <%= link_to(payments_path) do %>
+          <i class="fa fa-money"></i> My Payments
         <% end %>
       </li>
     </ul>

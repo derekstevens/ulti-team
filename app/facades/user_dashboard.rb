@@ -21,4 +21,7 @@ class UserDashboard
     events = events + Practice.where(team_id: team.id)
   end
 
+  def team_payment(team)
+    user_payments = @user.user_payments.select{|payment| payment.payment.team_id == team.id && payment.amount_paid < payment.amount_due}
+  end
 end

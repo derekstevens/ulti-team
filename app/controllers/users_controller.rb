@@ -14,6 +14,10 @@ class UsersController < ApplicationController
 		@schedule = UserSchedule.new(current_user)
 	end
 
+	def payments
+		@user_payments = current_user.user_payments.select{|payment| payment.amount_paid < payment.amount_due }
+	end
+
 	private
 
 		def find_teams(user)

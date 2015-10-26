@@ -1,0 +1,10 @@
+<% @user_payments.each do |user_payment| %>
+	<p><%= user_payment.payment.title %></p>
+	<%= user_payment.amount_paid %> of <%= user_payment.amount_due %></p>
+	<div class="progress">
+		<div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+			aria-valuenow="<%= user_payment.paid_amount_ratio %>" aria-valuemin="0" 
+			aria-valuemax="100" style="width: <%= user_payment.paid_amount_ratio %>%;">
+		</div>
+	</div>
+<% end %>

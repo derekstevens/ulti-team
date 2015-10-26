@@ -134,6 +134,50 @@
 			</div>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-lg-10">
+			<div class="portlet portlet-default">
+				<div class="portlet-heading">
+					<div class="portlet-title">
+						<h4>Payments</h4>
+					</div>
+
+					<div class="portlet-widgets">
+						<%= link_to "Create New", new_team_payment_path(@team), class: "badge" %>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="portlet-body">
+					<div class="total-payments">
+						<h5>Total Payments</h5>
+						<div class="progress">
+							<div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+										aria-valuenow="<%= @dashboard.total_payments_ratio %>" aria-valuemin="0" 
+										aria-valuemax="100" style="width: <%= @dashboard.total_payments_ratio %>%;">
+										
+							</div>
+						</div>
+						  <%= @dashboard.total_payments_paid %> of <%= @dashboard.total_payments_due %>
+						<hr>
+					</div>
+					<div class="individual-payments">
+						<% @team.payments.each do |payment| %>
+						<p><%= payment.title %> | <%= payment.paid_amount %> of <%= payment.amount %></p>
+						<div class="progress">
+							<div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+										aria-valuenow="<%= payment.paid_amount_ratio %>" aria-valuemin="0" 
+										aria-valuemax="100" style="width: <%= payment.paid_amount_ratio %>%;">
+										
+							</div>
+						</div>
+							
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 	

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
   resources :rosters, :only => [:destroy]
   resources :roster_invites
+  resources :user_payments
 
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -29,6 +30,8 @@ Rails.application.routes.draw do
   post 'teams/:team_id/team_rosters/:id/copy' => 'team_rosters#copy'
   get 'teams/:team_id/team_rosters/:id/toggle_captain' => 'team_rosters#toggle_captain'
   get 'teams/:team_id/team_rosters/:id/manage' => 'team_rosters#manage', as: :manage_team_roster
+  patch 'userpayments/:id/update_amount_paid' => 'user_payments#update_amount_paid', as: :user_payment_amount_paid
+  get 'payments' => 'users#payments'
 
   authenticated :user do 
     root to: 'users#dashboard', as: :authenticated_root

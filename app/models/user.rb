@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_many :sent_invites, :class_name => "RosterInvite", :foreign_key => 'sender_id'
   has_many :team_admins, :class_name => "Teams", :foreign_key => 'team_admin_id'
   has_many :events, :class_name => "Events", :foreign_key => 'created_by_user_id'
+  has_many :user_payments
+  has_many :payments, through: :user_payments
 
   def full_name
   	"#{self.first_name} #{self.last_name}"
