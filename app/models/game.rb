@@ -13,5 +13,4 @@ class Game < ActiveRecord::Base
 	def start_time
 		self.game_date
 	end
-
 end

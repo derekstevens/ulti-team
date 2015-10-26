@@ -147,15 +147,14 @@
 										<% end %>
 									</div>
 								</div>
-								
 							</div>
 						</div>
-
 					</div>
 				</div>
 
 				<div class="portlet-footer">
 					<%= link_to	"Rosters", team_team_rosters_path(team) %>
+
 					<% if current_user.is_captain?(team) %>
 						<span class="portlet-quicklinks-right">
 							<%= link_to "Go to team dashboard", team_dashboard_path(team) %>

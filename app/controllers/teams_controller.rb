@@ -86,6 +86,4 @@ class TeamsController < ApplicationController
 			team_roster.save
 			team_roster.add_current_user_as_captain(current_user)
 		end
-
-
 end
