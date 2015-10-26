@@ -7,6 +7,6 @@ class TeamSchedule
 
 	def events
   	events = Game.where(team_id: @team.id)
-  	events = events + Practice.where(team_id: @team.id)
+  	events = events + Practice.where(team_id: @team.id) + Event.where(team_id: @team.id)
   end
 end

@@ -2,6 +2,7 @@ class Team < ActiveRecord::Base
 	has_many :team_rosters
 	has_many :games
 	has_many :practices
+	has_many :events
 	has_many :payments
 	
   belongs_to :team_admin, :class_name => 'User'

@@ -10,7 +10,7 @@ class UserSchedule
 		events = []
 		teams.each do |team|
 			events = events + team.games
-			events = events + team.practices
+			events = events + team.practices + team.events
 		end
 		events
 	end

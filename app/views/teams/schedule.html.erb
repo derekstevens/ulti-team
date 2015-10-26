@@ -1,13 +1,20 @@
-<% if user_signed_in? && current_user.is_captain?(@team) %>
+<% if user_signed_in? %>
 <div class="row">
 	<div class="col-lg-8 col-lg-offset-2">
 		<div class="pull-right">
-	    <%= link_to new_team_game_path(@team), class: "btn btn-default" do %>
-	    	<i class="fa fa-plus"></i> Create Game
-	    <% end %> 
-	    <%= link_to new_team_practice_path(@team), class: "btn btn-default" do %>
-	    	<i class="fa fa-plus"></i> Create Practice
+			<% if current_user.is_captain?(@team) %>
+		    <%= link_to new_team_game_path(@team), class: "btn btn-default" do %>
+		    	<i class="fa fa-plus"></i> Create Game
+		    <% end %> 
+		    <%= link_to new_team_practice_path(@team), class: "btn btn-default" do %>
+		    	<i class="fa fa-plus"></i> Create Practice
+		    <% end %>
 	    <% end %>
+	    <% if current_user.is_on_team?(@team) %>
+		    <%= link_to new_team_event_path(@team), class: "btn btn-default" do %>
+		    	<i class="fa fa-plus"></i> Create Event
+		    <% end %>
+		  <% end %>
 		</div>
 	</div>
 </div>
@@ -21,8 +28,10 @@
 				<div>
 					<% if event.class == Game %>
 						<%= link_to "vs. #{event.opponent_name}", team_game_path(@team, event) %>
-					<% else %>
+					<% elsif event.class == Practice %>
 						<%= link_to 'Practice', team_practice_path(@team, event) %>
+					<% else %>
+						<%= link_to "#{event.title}", team_event_path(@team, event) %>
 					<% end %>
 				</div>
 			<% end %>
