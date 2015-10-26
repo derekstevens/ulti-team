@@ -2,10 +2,10 @@
   <div class="account-body">
     <h3>New Practice</h3>
 
-    <%= form_for([@team, @practice], class: "form account-form") do |f| %>
+    <%= form_for([@team, @practice], validate: :true, class: "form account-form") do |f| %>
 
       <div class="form-group">
-        <%= f.label :practice_date %><br>
+        <%= f.label :practice_date %>
 				<%= f.date_field :practice_date, class: "form-control" %>
       </div>
 
@@ -20,7 +20,7 @@
       </div>
 
       <div class="form-group">
-        <%= f.label :location %><br />
+        <%= f.label :location %>
 				<%= f.text_field :location, class: "form-control" %>
       </div>
 

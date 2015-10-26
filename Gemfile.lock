@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/DavyJonesLocker/client_side_validations.git
+  revision: c96871aaa8ba63d72e44d7046390b05e42611ef1
+  specs:
+    client_side_validations (4.2.0)
+      jquery-rails (>= 3.1.2, < 5.0.0)
+      rails (>= 4.0.0, < 4.3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -278,6 +286,8 @@ GEM
       rubyzip (~> 1.0)
       websocket (~> 1.0)
     shellany (0.0.1)
+    simple_calendar (2.0.3)
+      rails (>= 3.0)
     simplecov (0.9.1)
       docile (~> 1.1.0)
       multi_json (~> 1.0)
@@ -340,6 +350,7 @@ DEPENDENCIES
   bullet
   byebug
   capybara
+  client_side_validations!
   coffee-rails (~> 4.0.0)
   database_cleaner
   devise
@@ -365,6 +376,7 @@ DEPENDENCIES
   sass-rails (~> 5.0.0.beta1)
   sdoc (~> 0.4.0)
   selenium-webdriver
+  simple_calendar
   simplecov
   simplecov-rcov
   spring

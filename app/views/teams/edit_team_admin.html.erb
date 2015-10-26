@@ -6,15 +6,7 @@
     	<div class="alert">You are the only captain. Please add another captain before attempting to transfer team ownership.</div>
     <% else %>
 
-	    <%= form_for @team, :url => { :action => 'update_team_admin' }, class: "form account-form" do |f| %>
-	    	<% if @team.errors.any? %>
-	    		<div class="errors">
-	    			<% @team.errors.full_messages.each do |msg| %>
-	    				<p><%= msg %></p>
-	    			<% end %>
-	    		</div>
-	    	<% end %>
-
+	    <%= form_for @team, validate: :true, :url => { :action => 'update_team_admin' }, class: "form account-form" do |f| %>
 	      <div class="form-group">
 	        <%= f.label :team_admin_id, "Select New Admin" %>
 					<% @captains.includes(:user).each do |captain| %>

@@ -8,7 +8,6 @@ class RosterInvitesController < ApplicationController
 		@team_roster = TeamRoster.find params[:roster_invite][:team_roster_id]
 		params[:roster_invite][:email].strip.split(',').each do |email|
 			email.strip!
-			puts "--------#{email}--------"
 			roster_invite = RosterInvite.new(:email => email)
 			roster_invite.sender_id = current_user.id
 			roster_invite.team_roster_id = @team_roster.id

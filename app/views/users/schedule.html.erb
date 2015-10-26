@@ -1,0 +1,19 @@
+<div class="row">
+	<div class="col-lg-8 col-lg-offset-2">
+		<%= month_calendar events: @schedule.events do |date, events| %>
+			<%= date.strftime("%d") %>
+
+			<% events.each do |event| %>
+				<div>
+					<% if event.class == Game %>
+						<%= link_to "vs. #{event.opponent_name}", team_game_path(event.team, event) %>
+					<% elsif event.class == Practice %>
+						<%= link_to 'Practice', team_practice_path(event.team, event) %>
+					<% else %>
+						<%= link_to "#{event.title}", team_event_path(event.team, event) %>
+					<% end %>
+				</div>
+			<% end %>
+		<% end %>
+	</div>
+</div>

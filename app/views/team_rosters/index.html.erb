@@ -14,7 +14,7 @@
 
 		<div class="row">
 			<% @team_rosters.each do |team_roster| %>
-				<div class="col-lg-4">
+				<div class="col-lg-3">
 					<div class="portlet portlet-default">
 						<div class="portlet-heading">
 							<div class="portlet-title">
@@ -32,7 +32,7 @@
 						</div>
 
 						<div class="portlet-body">
-							<ul class="list-unstyled">
+							<ul class="list-unstyled text-center">
 								<% team_roster.rosters.includes(:user).each do |roster| %>
 								<li><%= roster.user.full_name %></li>
 								<% end %>
@@ -41,7 +41,8 @@
 						
 						<% if user_signed_in? && current_user.is_captain?(@team) %>
 						<div class="portlet-footer">
-							<%= link_to 'Manage Roster', team_team_roster_path(@team, team_roster), class: "btn btn-default" %>
+							<%= link_to 'Manage Roster', manage_team_roster_path(@team, team_roster), class: "btn btn-default" %>
+							<%= link_to 'View Details', team_team_roster_path(@team, team_roster), class: "btn btn-default pull-right" %>
 						</div>
 						<% end %>
 					</div>

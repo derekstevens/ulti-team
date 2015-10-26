@@ -1,0 +1,73 @@
+<div class="row">
+	<% if @payments.outstanding.any? %>
+	<div class="col-lg-8 col-lg-offset-2">
+		<h3>Outstanding Payments</h3>
+
+		<% @payments.outstanding.each do |payment| %>
+			<div class="portlet portlet-default">
+				<div class="portlet-heading">
+					<div class="portlet-title">
+						<%= link_to "View Details", team_payment_path(@team, payment), class: 'btn' %>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="portlet-body">
+					<div class="row">
+						<div class="col-lg-6">
+							<h3><%= payment.title %></h3>
+							<p><%= payment.due_date.strftime("%^a, %^b %d") %></p>
+						</div>
+						<div class="col-lg-6">
+							<%= payment.amount %>
+							<p><%= payment.description %></p>
+						</div>
+					</div>
+				</div>
+
+				<div class="portlet-footer">
+					<% if user_signed_in? && current_user.is_captain?(@team) %>
+						<%= link_to 'Edit Payment', edit_team_payment_path(@team, payment) %>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+	<% end %>
+</div>
+
+<div class="row">
+	<% if @payments.paid_entirely.any? %>
+	<div class="col-lg-8 col-lg-offset-2">
+		<h3>Paid In Full Payments</h3>
+
+		<% @payments.paid_entirely.each do |payment| %>
+			<div class="portlet portlet-default">
+				<div class="portlet-heading">
+					<div class="portlet-title">
+						<%= link_to "View Details", team_payment_path(@team, payment), class: 'btn' %>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="portlet-body">
+					<div class="row">
+						<div class="col-lg-6">
+							<h3><%= payment.title %></h3>
+							<p><%= payment.due_date.strftime("%^a, %^b %d") %></p>
+						</div>
+						<div class="col-lg-6">
+							<%= payment.amount %>
+							<p><%= payment.description %></p>
+						</div>
+					</div>
+				</div>
+
+				<div class="portlet-footer">
+					<% if user_signed_in? && current_user.is_captain?(@team) %>
+						<%= link_to 'Edit Payment', edit_team_payment_path(@team, payment) %>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+	<% end %>
+</div>

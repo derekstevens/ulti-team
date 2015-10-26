@@ -74,167 +74,24 @@
 	</div>
 </div>
 
-
-<div class="row"> <!-- STARTOF schedule widgets -->
+<div class="row schedule"> <!-- STARTOF Schedule -->
 	<div class="col-lg-8">
-		<hr>
-		<div class="col-lg-6">
-			<div class="portlet portlet-default">
-				<div class="portlet-heading">
-					<div class="portlet-title">
-						<h4>Upcoming Games</h4>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="portlet-body">
-					<% if @team.games.upcoming_games.count > 0 %>
-					<div class="table-responsive">
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th>Date</th>
-									<th>Opponent</th>
-									<th>Location</th>
-									<th>Actions</th>
-								</tr>
-							</thead>
-							<tbody>
-								<% @team.games.upcoming_games.each do |game| %>
-								  <tr>
-										<td><%= game.game_date.strftime("%^a, %^b %d") %></td>
-										<td><%= game.opponent_name %></td>
-										<td><%= game.location %></td>
-										
-										<td>
-											<%= link_to 'View Details', team_game_path(@team, game) %>
-											<% if current_user.is_captain?(@team) %>
-											| <%= link_to 'Edit', edit_team_game_path(@team, game) %>
-											<% end %>
-										</td>
-										
-									</tr>
-								<% end %>
-							<tbody>
-						</table>
-					</div>
-					<% else %>
-					
-						<p class="alert alert-info">
-							No upcoming games. 
-							<% if current_user.is_captain?(@team) %>
-								<%= link_to 'Schedule one now!', new_team_game_path(@team), class: 'alert-link' %>
-							<% end %>
-						</p>
-					
-					<% end %>
-				</div>
-			</div>
-		</div>
+		  <span class="pull-right">
+		    <%= link_to "Full Schedule", team_schedule_path(@team) %>
+		  </span>
+		<%= week_calendar number_of_weeks: 2, events: @dashboard.schedule.events do |date, events| %>
+			<%= date.strftime("%d") %>
 
-		<div class="col-lg-6">
-			<div class="portlet portlet-default">
-				<div class="portlet-heading">
-					<div class="portlet-title">
-						<h4>Past Games</h4>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="portlet-body">
-					<% if @team.games.past_games.count > 0 %>
-					<div class="table-responsive">
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th>Date</th>
-									<th>Opponent</th>
-									<th>Score</th>
-									<th>Actions</th>
-								</tr>
-							</thead>
-							<tbody>
-								<% @team.games.past_games.each do |game| %>
-								  <tr>
-										<td><%= game.game_date.strftime("%^a, %^b %d") %></td>
-										<td><%= game.opponent_name %></td>
-										<td><%= "#{game.team_score} - #{game.opponent_score}" %></td>
-										
-										<td>
-											<%= link_to 'View Details', team_game_path(@team, game) %>
-											<% if current_user.is_captain?(@team) %>
-											| <%= link_to 'Edit', edit_team_game_path(@team, game) %>
-											<% end %>
-										</td>
-										
-									</tr>
-								<% end %>
-							<tbody>
-						</table>
-					</div>
+			<% events.each do |event| %>
+				<div>
+					<% if event.class == Game %>
+						<%= link_to "vs. #{event.opponent_name}", team_game_path(@team, event) %>
 					<% else %>
-					
-						<p class="alert alert-info">
-							No past games.
-						</p>
-					
+						<%= link_to 'Practice', team_practice_path(@team, event) %>
 					<% end %>
 				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="row">
-	<div class="col-lg-8">
-		<div class="col-lg-6">
-			<div class="portlet portlet-default">
-				<div class="portlet-heading">
-					<div class="portlet-title">
-						<h4>Upcoming Practices</h4>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="portlet-body">
-					<% if @team.practices.upcoming_practices.count > 0 %>
-					<div class="table-responsive">
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th>Date</th>
-									<th>Location</th>
-									<th>Actions</th>
-								</tr>
-							</thead>
-							<tbody>
-								<% @team.practices.upcoming_practices.each do |practice| %>
-								  <tr>
-										<td><%= practice.practice_date.strftime("%^a, %^b %d") %></td>
-										<td><%= practice.location %></td>
-										
-										<td>
-											<%= link_to 'View Details', team_game_path(@team, practice) %>
-											<% if current_user.is_captain?(@team) %>
-											| <%= link_to 'Edit', edit_team_practice_path(@team, practice) %>
-											<% end %>
-										</td>
-										
-									</tr>
-								<% end %>
-							<tbody>
-						</table>
-					</div>
-					<% else %>
-					
-						<p class="alert alert-info">
-							No upcoming practices.
-							<% if current_user.is_captain?(@team) %>
-								<%= link_to 'Schedule one now!', new_team_practice_path(@team), class: 'alert-link' %>
-							<% end %>
-						</p>
-					
-					<% end %>
-				</div>
-			</div>
-		</div>
+			<% end %>
+		<% end %>
 	</div>
 </div>
 
@@ -247,6 +104,9 @@
 		    <% end %> 
 		    <%= link_to new_team_practice_path(@team), class: "btn btn-default" do %>
 		    	<i class="fa fa-plus"></i> Create Practice
+		    <% end %>
+		    <%= link_to new_team_event_path(@team), class: "btn btn-default" do %>
+		    	<i class="fa fa-plus"></i> Create Event
 		    <% end %>
 		    <%= link_to(edit_team_path(@team), class: "btn btn-default") do %>
 		      <i class="fa fa-pencil"></i> Edit Team
@@ -270,6 +130,51 @@
 							<li><%= roster.user.full_name %></li>
 						<% end %>
 					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-10">
+			<div class="portlet portlet-default">
+				<div class="portlet-heading">
+					<div class="portlet-title">
+						<h4>Payments</h4>
+					</div>
+
+					<div class="portlet-widgets">
+						<%= link_to "Create New", new_team_payment_path(@team), class: "badge" %>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="portlet-body">
+					<div class="total-payments">
+						<h5>Total Payments</h5>
+						<div class="progress">
+							<div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+										aria-valuenow="<%= @dashboard.total_payments_ratio %>" aria-valuemin="0" 
+										aria-valuemax="100" style="width: <%= @dashboard.total_payments_ratio %>%;">
+										
+							</div>
+						</div>
+						  <%= @dashboard.total_payments_paid %> of <%= @dashboard.total_payments_due %>
+						<hr>
+					</div>
+					<div class="individual-payments">
+						<% @team.payments.each do |payment| %>
+						<p><%= payment.title %> | <%= payment.paid_amount %> of <%= payment.amount %></p>
+						<div class="progress">
+							<div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+										aria-valuenow="<%= payment.paid_amount_ratio %>" aria-valuemin="0" 
+										aria-valuemax="100" style="width: <%= payment.paid_amount_ratio %>%;">
+										
+							</div>
+						</div>
+							
+						<% end %>
+					</div>
 				</div>
 			</div>
 		</div>

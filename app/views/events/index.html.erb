@@ -1,0 +1,73 @@
+<div class="row">
+	<% if @events.upcoming_events.any? %>
+	<div class="col-lg-8 col-lg-offset-2">
+		<h3>Upcoming Events</h3>
+
+		<% @events.upcoming_events.each do |event| %>
+			<div class="portlet portlet-default">
+				<div class="portlet-heading">
+					<div class="portlet-title">
+						<%= link_to "View Details", team_event_path(@team, event), class: 'btn' %>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="portlet-body">
+					<div class="row">
+						<div class="col-lg-6">
+							<%= event.title %>
+							<p><%= event.event_date.strftime("%^a, %^b %d") %></p>
+							<%= event.start_time.strftime("%I:%M %p") %>
+						</div>
+						<div class="col-lg-6">
+							<%= event.location %>
+						</div>
+					</div>
+				</div>
+
+				<div class="portlet-footer">
+					<% if user_signed_in? && current_user.created_event?(event) %>
+						<%= link_to 'Edit Event', edit_team_event_path(@team, event) %>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+	<% end %>
+
+	<% if @events.past_events.any? %>
+	<div class="col-lg-8 col-lg-offset-2">
+		<h3>Past Events</h3>
+
+		<% @events.past_events.each do |event| %>
+			<div class="portlet portlet-default">
+				<div class="portlet-heading">
+					<div class="portlet-title">
+						<%= link_to "View Details", team_event_path(@team, event), class: 'btn' %>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="portlet-body">
+					<div class="row">
+						<div class="col-lg-6">
+							<%= event.title %>
+							<p><%= event.event_date.strftime("%^a, %^b %d") %></p>
+							<%= event.start_time.strftime("%I:%M %p") %>
+						</div>
+						<div class="col-lg-6">
+							<%= event.location %>
+						</div>
+					</div>
+				</div>
+
+				<div class="portlet-footer">
+					<% if user_signed_in? && current_user.created_event?(event) %>
+						<%= link_to 'Edit Event', edit_team_event_path(@team, event) %>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+	<% end %>
+</div>
+
+

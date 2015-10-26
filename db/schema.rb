@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151005004144) do
+ActiveRecord::Schema.define(version: 20151026013257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "team_id"
+    t.integer  "created_by_user_id"
+    t.string   "location"
+    t.time     "start_time"
+    t.time     "end_time"
+    t.date     "event_date"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "description"
+    t.string   "title"
+  end
 
   create_table "games", force: :cascade do |t|
     t.integer  "team_id"
@@ -29,6 +42,22 @@ ActiveRecord::Schema.define(version: 20151005004144) do
     t.time     "end_time"
   end
 
+  add_index "games", ["team_id"], name: "index_games_on_team_id", using: :btree
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "team_id"
+    t.integer  "amount_cents",    default: 0,     null: false
+    t.string   "amount_currency", default: "USD", null: false
+    t.string   "description"
+    t.string   "title"
+    t.datetime "due_date"
+    t.boolean  "paid_in_full",    default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "payments", ["team_id"], name: "index_payments_on_team_id", using: :btree
+
   create_table "practices", force: :cascade do |t|
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
@@ -38,6 +67,8 @@ ActiveRecord::Schema.define(version: 20151005004144) do
     t.time     "start_time"
     t.time     "end_time"
   end
+
+  add_index "practices", ["team_id"], name: "index_practices_on_team_id", using: :btree
 
   create_table "roster_invites", force: :cascade do |t|
     t.string   "email"
@@ -66,6 +97,8 @@ ActiveRecord::Schema.define(version: 20151005004144) do
     t.boolean  "current"
   end
 
+  add_index "team_rosters", ["team_id"], name: "index_team_rosters_on_team_id", using: :btree
+
   create_table "teams", force: :cascade do |t|
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
@@ -74,6 +107,22 @@ ActiveRecord::Schema.define(version: 20151005004144) do
     t.string   "league"
     t.integer  "team_admin_id"
   end
+
+  add_index "teams", ["name"], name: "index_teams_on_name", using: :btree
+
+  create_table "user_payments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "payment_id"
+    t.integer  "amount_due_cents",     default: 0,     null: false
+    t.string   "amount_due_currency",  default: "USD", null: false
+    t.integer  "amount_paid_cents",    default: 0,     null: false
+    t.string   "amount_paid_currency", default: "USD", null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "user_payments", ["payment_id"], name: "index_user_payments_on_payment_id", using: :btree
+  add_index "user_payments", ["user_id"], name: "index_user_payments_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false

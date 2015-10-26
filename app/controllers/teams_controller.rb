@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
 	before_filter :authenticate_user!, :only => [:new, :create]
-	before_filter :authenticate_captain!, :only => [:edit, :update, :destroy, :dashboard]
+	before_filter :authenticate_captain!, :only => [:edit, :update, :destroy, :dashboard, :edit_team_admin]
 	
 	def show
 		@team = Team.find params[:team_id]
@@ -11,6 +11,12 @@ class TeamsController < ApplicationController
 		@team = Team.find params[:team_id]
 
 		@dashboard = TeamDashboard.new(@team)
+	end
+
+	def schedule
+		@team = Team.find params[:team_id]
+
+		@schedule = TeamSchedule.new(@team)
 	end
 	
 	def new
@@ -80,6 +86,4 @@ class TeamsController < ApplicationController
 			team_roster.save
 			team_roster.add_current_user_as_captain(current_user)
 		end
-
-
 end

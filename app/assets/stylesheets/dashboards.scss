@@ -11,7 +11,7 @@ hr {
 	right: 20px;
 	width: 25%;
 	height: 100%;
-	overflow-y: auto;
+	overflow-y: visible;
 }
 
 .page-title h1 {
@@ -192,4 +192,8 @@ hr {
 
 .circle-tile-heading.green:hover {
 	background-color: #138f77
+}
+
+.schedule {
+	margin-top: 50px;
 }

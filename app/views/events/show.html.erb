@@ -1,0 +1,16 @@
+<div class="row">
+	<div class="col-lg-8 col-lg-offset-2">
+		<h1><%= @event.title %></h1>
+		<h5><%= @event.description %></h5>
+
+		<div class="row">
+			<div class="col-lg-6">
+				<%= @event.event_date.strftime("%^a, %^b %d") %>
+				<%= @event.start_time.strftime("%I:%M %p") %>
+			</div>
+			<div class="col-lg-6">
+				<%= @event.location %>
+			</div>
+		</div>
+	</div>
+</div>

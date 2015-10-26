@@ -5,15 +5,20 @@ Rails.application.routes.draw do
     resources :team_rosters
     resources :games
     resources :practices
+    resources :payments
+    resources :events
   end
   resources :rosters, :only => [:destroy]
   resources :roster_invites
+  resources :user_payments
 
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+  get 'teams/:team_id/schedule' => 'teams#schedule', as: :team_schedule
   get 'teams/:team_id/dashboard' => 'teams#dashboard', as: :team_dashboard
   get 'dashboard' => 'users#dashboard'
+  get 'schedule' => 'users#schedule', as: :user_schedule
   # You can have the root of your site routed with "root"
   get 'teams/:team_id' => 'teams#show', as: :team
   get 'teams/:team_id/edit' => 'teams#edit', as: :edit_team
@@ -24,6 +29,9 @@ Rails.application.routes.draw do
   put 'teams/:team_id' => 'teams#update'
   post 'teams/:team_id/team_rosters/:id/copy' => 'team_rosters#copy'
   get 'teams/:team_id/team_rosters/:id/toggle_captain' => 'team_rosters#toggle_captain'
+  get 'teams/:team_id/team_rosters/:id/manage' => 'team_rosters#manage', as: :manage_team_roster
+  patch 'userpayments/:id/update_amount_paid' => 'user_payments#update_amount_paid', as: :user_payment_amount_paid
+  get 'payments' => 'users#payments'
 
   authenticated :user do 
     root to: 'users#dashboard', as: :authenticated_root
