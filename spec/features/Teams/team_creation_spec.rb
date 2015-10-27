@@ -34,6 +34,5 @@ feature "team creation" do
 
 		captain = Roster.last
 		expect(captain).to have_attributes(user_id: user.id, captain: true)
-
 	end
 end

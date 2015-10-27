@@ -1,5 +1,5 @@
 class TeamRostersController < ApplicationController
-	before_filter :authenticate_captain!, :only => [:new, :create, :edit, :update, :destroy, :copy, :toggle_captain, :manage]
+	before_filter :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy, :copy, :toggle_captain, :manage]
 
 	def index
 		@team = Team.find(params[:team_id])

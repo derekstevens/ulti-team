@@ -1,4 +1,6 @@
 class PracticesController < ApplicationController
+	before_filter :authenticate_user!, :except => [:show]
+
 	def index
 		@team = Team.find params[:team_id]
 		@practices = @team.practices

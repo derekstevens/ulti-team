@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-	before_filter :authenticate_captain!
+	before_filter :authenticate_user!
 
 	def index
 		@team = Team.find params[:team_id]

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Team" tests="3" time="0.002376" failures="0" errors="0" skipped="0" timestamp="2015-01-25T16:32:33-05:00">
-  <testcase name="Team is valid with a name and location" time="0.000709">
-  </testcase>
-  <testcase name="Team is invalid without a name" time="0.000788">
-  </testcase>
-  <testcase name="Team is invalid without a location" time="0.000721">
-  </testcase>
-</testsuite>
