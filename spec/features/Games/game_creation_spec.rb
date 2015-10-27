@@ -24,6 +24,23 @@ feature "game creation" do
 	end
 
 	scenario "a player cannot create a game" do
+		roster = FactoryGirl.create(:roster)
+		user = roster.user
+		team = roster.team_roster.team
 
+		visit 'users/sign_in'
+
+		fill_in "Email", :with => user.email
+		fill_in "Password", :with => user.password
+		click_button 'Log In'
+
+		visit "teams/#{team.id}/games/new"
+
+		fill_in "Location", :with => "Cambridge"
+		fill_in "Game date", :with => Date.today
+
+		click_button 'Create Game'
+
+		expect(page).to have_content("You are not authorized to perform this action")
 	end 
 end
